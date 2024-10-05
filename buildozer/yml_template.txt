@@ -1,0 +1,21 @@
+# Build by JDM-Buildozer
+name: {package_name}
+on:
+  workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build APK
+        uses: digreatbrian/buildozer-action@v1
+        with:
+          buildozer-cmd: buildozer -v android debug
+          work-dir: .
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: {artifact_name}
+          path: ./bin/*.apk
