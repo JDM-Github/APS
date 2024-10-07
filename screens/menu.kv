@@ -1,0 +1,106 @@
+
+<LabelButtonLeft@BoxLayout>:
+    text: ""
+    release: lambda: None
+    size_hint_y: None
+	height:	Window.height * 0.05
+    padding: [dp(10), dp(10)]
+
+    canvas.before:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+			size: self.size
+            pos: self.pos
+        
+        Color:
+			rgba: 0.6, 0.6, 0.6, 1
+        Line:
+            rectangle: self.x, self.y, self.width, self.height
+
+    Label:
+        size_hint_x: 0.9
+        text: self.parent.text
+        text_size: self.width, None
+        halign: 'left'
+        valign: 'center'
+        color: 0.3, 0.3, 0.3, 1
+
+    ClickableImage:
+        size_hint_x: 0.1
+        size_hint_y: None
+        pos_hint: {'center_y': 0.5}
+        height: self.parent.height * 0.5
+        source: "assets/arrow-right.png"
+        color: 0.3, 0.3, 0.3, 1
+        on_release: self.parent.release()
+
+<Menu>:
+    name: "menu"
+    canvas.before:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+            source:	'assets/normal-bg.png'
+			size: Window.size
+
+	StackLayout:
+        orientation: 'lr-tb'
+		size_hint: (0.98, None)
+		height:	Window.height
+
+		spacing: dp(2)
+		padding: [dp(20), dp(20)]
+		pos_hint: {'center_x': 0.5}
+
+        BoxLayout:
+			spacing: Window.width * 0.05
+			orientation: "horizontal"
+			size_hint_y: None
+			height: Window.height * 0.05
+
+			ClickableImage:
+				size_hint_x: 0.2
+				source: "assets/logo.png"
+                on_release: root.manager.go_to_login()
+                fit_mode: "fill"
+
+			Widget:
+				size_hint_x: 0.4
+			
+			CustomButton:
+				size_hint_x: 0.3
+				text: "Sign in"
+                on_release: root.manager.go_to_login()
+
+			ClickableImage:
+				size_hint_x: 0.1
+				color: 0.3, 0.3, 0.3, 1
+				source: "assets/home.png"
+				on_release: root.manager.go_to_dashboard()
+        
+        Widget:
+            size_hint_y: None
+            height: Window.height * 0.02
+
+        LabelButtonLeft:
+            text: "Home"
+            release: root.manager.go_to_dashboard 
+        LabelButtonLeft:
+            # text: "Create Account"
+            text: "Profile"
+            # release: root.manager.go_to_register
+            release: root.manager.go_to_user_profile
+        
+        LabelButtonLeft:
+            text: "Job Interview"
+            release: root.manager.go_to_job_interview 
+
+        LabelButtonLeft:
+            text: "Help Center"
+        LabelButtonLeft:
+            text: "Terms"
+            release: root.open_terms
+        LabelButtonLeft:
+            text: "Policy"
+            release: root.open_policy

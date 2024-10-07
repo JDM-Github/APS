@@ -1,0 +1,273 @@
+#:import Window	kivy.core.window.Window
+#:import ScrollEffect kivy.effects.scroll.ScrollEffect
+
+
+<CircleImage@Image>:
+<ClickableImage@ButtonBehavior+Image>
+
+<LineWidget@Widget>:
+    size_hint_x: None
+    size_hint_y: None
+    width: Window.width
+    height: Window.height * 0.001
+    pos_hint: {'center_x': 0.5}
+    canvas.before:
+        Color:
+            rgba: 0.3, 0.3, 0.3, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<HeaderLabel@Label>:
+    size_hint_y: None
+    height: Window.height * 0.1
+    color: 0.3, 0.3, 0.3, 1
+    text: "Washing Machine Job AHAHAHHAHAHAHAHHAHAH"
+    text_size: self.width, None
+    halign: 'left'
+    valign: 'center'
+    font_size: sp(22)
+    bold: True
+
+<ImageLabel@BoxLayout>:
+	text: ""
+	source: ""
+	size_hint_y: None
+	height:	Window.height * 0.03
+	orientation: "horizontal"
+	spacing: dp(10)
+
+	Image:
+		size_hint_x: 0.2
+		color: 0.3, 0.3, 0.3, 1
+		source: root.source
+
+	Label:
+		color: 0.3, 0.3, 0.3, 1
+		text: root.text
+		text_size: self.width, None
+		halign: 'left'
+        valign: 'center'
+		font_size: sp(14)
+
+<BackWidget@BoxLayout>:
+	release: lambda: None
+    orientation: "horizontal"
+    size_hint_x: None
+    size_hint_y: None
+    width: Window.width
+	height:	Window.height * 0.03
+    pos_hint: {'center_x': 0.5}
+    
+    ClickableImage:
+        size_hint_x: 0.1
+        source: "assets/back.png"
+        color: 0.3, 0.3, 0.3, 1
+        on_release: root.release()
+    
+    Widget:
+        size_hint_x: 0.9
+
+<LabelLabel@BoxLayout>:
+    text: ""
+	text2: ""
+    size_hint_y: None
+	height:	Window.height * 0.05
+    padding: [dp(10), dp(10)]
+
+    canvas.before:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+			size: self.size
+            pos: self.pos
+        
+        Color:
+			rgba: 0.6, 0.6, 0.6, 1
+        Line:
+            rectangle: self.x, self.y, self.width, self.height
+
+    Label:
+        size_hint_x: 0.5
+        text: self.parent.text
+        text_size: self.width, None
+        halign: 'left'
+        valign: 'center'
+        color: 0.3, 0.3, 0.3, 1
+
+    Label:
+		text: self.parent.text2
+        size_hint_x: 0.5
+
+		text_size: self.width, None
+		halign: 'right'
+        valign: 'center'
+        color: 0.3, 0.3, 0.3, 1
+
+<SpaceWidget@Widget>:
+    size_hint_y: None
+    height: Window.height * 0.025
+
+<TextInputImage@Widget>
+	hint_text: ''
+	padding: [dp(10), dp(10)]
+
+	size_hint_y: None
+	height:	dp(40)
+	canvas.before:
+		Color:
+			rgba: 0.95,	0.95, 0.95,	1 
+
+		RoundedRectangle:
+			size: self.size
+			pos: self.pos
+			radius:	[dp(10)]
+
+        Color:
+            rgba: 0.5, 0.5, 0.5, 1
+
+        Line:
+            rounded_rectangle: self.x, self.y, self.width, self.height, dp(10), dp(10), dp(10), dp(10)
+
+	TextInput:
+		hint_text: self.parent.hint_text
+		background_color: 1, 1, 1, 0
+		foreground_color: 0.3, 0.3,	0.3, 1
+		padding: self.parent.padding
+		font_size: sp(14)
+
+		size: self.parent.size
+		pos: self.parent.pos
+
+<CustomButton@Button>
+	default_color: 120/255,	200/255, 210/255, 1		
+	pressed_color: 80/255, 160/255,	170/255, 1  
+
+	background_normal: ''
+	background_color: 0, 0, 0, 0
+	color: 1, 1, 1, 1
+	bold: True
+
+	canvas.before:
+		Color:
+			rgba: self.pressed_color if self.state == 'down' else self.default_color
+		RoundedRectangle:
+			size: self.size
+			pos: self.pos
+			radius:	[dp(10)]
+
+		Color:
+			rgba: 0, 0, 0, 1
+		Line:
+			width: 1
+			rounded_rectangle: [self.x,	self.y,	self.width,	self.height, dp(10)]	
+
+<OfferWidget@BoxLayout>:
+	orientation: "vertical"	
+    size_hint_y: None
+	height: Window.height * 0.2
+	padding: [dp(10), dp(10)]
+
+	canvas.before:
+		Color:
+			rgba: (1, 1, 1, 1)
+		RoundedRectangle: 
+			size: self.size
+			pos: self.pos
+	
+	Label:
+		size_hint_y: None
+		height: self.parent.height * 0.2
+		text: "Washing Machine Job AHAHAHHAHAHAHAHHAHAH	"
+		text_size: self.width, None
+		halign: 'left'
+		valign: 'center'
+		font_size: sp(16)
+		color: 0.2, 0.2, 0.2, 1
+		shorten: True
+		shorten_from: 'right'
+
+	BoxLayout:
+		orientation: 'horizontal'
+		size_hint_y: None
+		height: self.parent.height * 0.2
+		
+		Label:
+			text: "Posted: 3 days ago"
+			halign: 'left'
+			valign: 'middle'
+			color: 0.5, 0.5, 0.5, 1
+			size_hint_x: 0.6
+			text_size: self.width, None
+			font_size: sp(12)
+
+		Label:
+			text: "Rate: $25/hour"
+			halign: 'right'
+			valign: 'middle'
+			color: 0.2, 0.7, 0.2, 1
+			size_hint_x: 0.4
+			text_size: self.width, None
+			font_size: sp(12)
+	
+	Widget:
+		size_hint_y: None
+		height: self.parent.height * 0.3
+
+	BoxLayout:
+		orientation: 'horizontal'
+		size_hint_y: None
+		height: self.parent.height * 0.2
+
+		Widget:
+			size_hint_x: 0.6
+
+		CustomButton:
+			id: apply_button
+			text: "Apply Now"
+			size_hint_x: 0.4
+			on_release: app.apply_for_job()
+
+<CustomPopup>:
+    title: "Scrollable Popup"
+	title_color: 0.2, 0.2, 0.2, 1
+    size_hint: 0.8, 0.5
+    auto_dismiss: False
+    background_color: 1, 1, 1, 1
+	background: ""
+	text_content: ""
+
+	canvas.before:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+			size: self.size
+			pos: self.pos
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        ScrollView:
+            Label:
+                id: scroll_label
+                text: root.text_content
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
+                padding: dp(10), dp(10)
+				color: 0.3, 0.3, 0.3, 1
+
+        CustomButton:
+            text: "CLOSE"
+            size_hint_y: None
+            height: dp(40)
+            on_release: root.dismiss()
+
+<MainStackLayout@StackLayout>:
+	orientation: 'lr-tb'
+	size_hint: (0.98, None)
+	height:	Window.height
+
+	spacing: dp(10)
+	padding: [dp(10), dp(10)]
+	pos_hint: {'center_x': 0.5,	'center_y':	0.5}

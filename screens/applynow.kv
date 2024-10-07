@@ -1,0 +1,186 @@
+<ResumeWidget>:
+    size_hint_y: None
+    height: Window.height * 0.06
+    orientation: 'horizontal'
+	padding: dp(5)
+	spacing: dp(10)
+
+	source: ""
+	text: ""
+	clickable: False
+
+	canvas.before:
+		Color:
+			rgba: 0, 0, 0, 1
+		Line:
+			rectangle: self.x, self.y, self.width, self.height
+
+    ClickableImage:
+        source: root.source
+        size_hint_x: None
+        width: dp(40)
+		fit_mode: "fill"
+		color: 0.5, 0.5, 0.5, 1
+		on_release: root.open_file_manager() if root.clickable else lambda: None
+
+	Label:
+		text: root.selected_file if root.selected_file else root.text
+		halign: 'left'
+		valign: 'middle'
+		text_size: self.width, None
+		shorten: True
+		color: 0, 0, 0, 1
+		font_size: sp(14)
+	
+	CheckBox:
+        size_hint_x: None
+        width: dp(30)
+        group: 'choose_resume' 
+
+<CustomRadioButton@BoxLayout>:
+    size_hint_y: None
+    height: Window.height * 0.03
+    orientation: 'horizontal'
+
+    CheckBox:
+        size_hint_x: None
+        width: dp(30)
+        group: 'test_question' 
+
+    Label:
+        text: "Option Text" 
+        halign: 'left'
+        valign: 'middle'
+        text_size: self.width, None
+        size_hint_x: 1
+        size_hint_y: None
+        height: self.texture_size[1]
+		color: 0.3, 0.3, 0.3, 1
+	
+
+<FileManagerPopup>:
+    title: "Select a File"
+    size_hint: 0.8, 0.8
+    BoxLayout:
+        orientation: 'vertical'
+
+        FileChooserListView:
+            id: filechooser
+            on_selection: root.select_file(filechooser.selection)
+
+        Button:
+            text: "Cancel"
+            size_hint_y: None
+            height: dp(40)
+            on_release: root.dismiss()
+
+<ApplyNow>:
+    name: 'applynow'
+	canvas.before:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+			size: Window.size
+		
+	
+	ScrollView:
+		do_scroll_x: False
+		do_scroll_y: True
+		size_hint: (0.96, 1)
+		pos_hint: {'center_x': 0.5}
+		effect_cls: ScrollEffect
+
+		BoxLayout:
+			orientation: 'vertical'
+			size_hint: (1, None)
+			height:	self.minimum_height
+
+			spacing: dp(2)
+			padding: [dp(20), dp(5)]
+			pos_hint: {'center_y': 0.5}
+
+			BackWidget:
+				release: root.manager.go_to_job
+				
+			HeaderLabel:
+	    	    height: Window.height * 0.05
+				font_size: sp(18)
+				text: "Add a resume"
+	
+			SpaceWidget:
+				height: Window.height * 0.01
+			
+			ResumeWidget:
+				id: custom_radio
+				text: "No file selected"
+				source: "assets/upload_pdf.png"
+				clickable: True
+
+			SpaceWidget:
+			
+			LineWidget:
+
+			SpaceWidget:
+			ResumeWidget:
+				source: "assets/no_pdf.png"
+				text: "Apply without a resume"
+
+			SpaceWidget:
+
+			LineWidget:
+
+			SpaceWidget:
+			HeaderLabel:
+    	        height: Window.height * 0.05
+				font_size: sp(18)
+				text: "Answer these question from the employer"
+			SpaceWidget:
+
+			HeaderLabel:
+    	        height: Window.height * 0.03
+				font_size: sp(14)
+				bold: False
+				text: "Test question 1"
+
+			BoxLayout:
+				orientation: "vertical"
+				size_hint_y: None
+				height: self.minimum_height
+				spacing: dp(5)
+
+				CustomRadioButton:
+				CustomRadioButton:
+				CustomRadioButton:
+				CustomRadioButton:
+
+			SpaceWidget:
+
+			HeaderLabel:
+    	        height: Window.height * 0.03
+				font_size: sp(14)
+				bold: False
+				text: "Test question 2"
+
+			BoxLayout:
+				orientation: "vertical"
+				size_hint_y: None
+				height: self.minimum_height
+				spacing: dp(5)
+
+				CustomRadioButton:
+				CustomRadioButton:
+				CustomRadioButton:
+				CustomRadioButton:
+
+			SpaceWidget:
+				height: Window.height * 0.02
+
+			CustomButton:
+				size_hint_y: None
+    	        height: Window.height * 0.05
+				font_size: sp(18)
+				text: "Continue"
+			
+			SpaceWidget:
+				height: Window.height * 0.1
+

@@ -19,3 +19,4 @@ jobs:
         with:
           name: JDM_template-0.0.1
           path: ./bin/*.apk
+

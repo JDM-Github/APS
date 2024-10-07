@@ -1,0 +1,147 @@
+
+<Profile>:
+    name: 'profile-user'
+
+    canvas.before:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+			size: Window.size
+        
+        Color:
+			rgba: 150/255,	220/255, 230/255, 1
+		Rectangle:
+			size: Window.width, Window.height * 0.18
+            pos: 0, Window.height * 0.82
+
+	BoxLayout:
+		orientation: 'vertical'
+		size_hint: (0.96, None)
+		height:	self.minimum_height
+
+		spacing: dp(2)
+		padding: [dp(20), dp(20)]
+		pos_hint: {'center_x': 0.5,	'center_y':	0.5}
+
+        BackWidget:
+			release: root.manager.go_to_menu
+        
+        SpaceWidget:
+            height: Window.height * 0.01
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: Window.height * 0.1
+            padding: [dp(10), dp(10)]
+
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [dp(10), dp(10), dp(10), dp(10)]
+
+                Color:
+                    rgba: 0.3, 0.3, 0.3, 1
+                Line:
+                    rounded_rectangle: self.x, self.y, self.width, self.height, dp(10), dp(10), dp(10), dp(10) 
+
+            HeaderLabel:
+                text: "John Dave Pega"
+                size_hint_x: 0.7
+                height: self.parent.height
+                font_size: sp(18)
+
+            Widget:
+                size_hint_x: None
+                height: dp(50)
+                width: dp(50)
+
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1
+                    Ellipse:
+                        source: "assets/JDMBG.png"
+                        pos: self.pos
+                        size: self.size
+
+        SpaceWidget:
+        LineWidget:
+        SpaceWidget:
+            height: Window.height * 0.01
+        BoxLayout:
+            orientation: "vertical"
+            spacing: dp(10)
+            size_hint_y: None
+            height: self.minimum_height
+
+            ImageLabel:
+                text: "jdmaster888@gmail.com"
+                source: "assets/email.png"
+            ImageLabel:
+                text: "0930 323 8796"
+                source: "assets/phone.png"
+            ImageLabel:
+                text: "Calamba City, Laguna Parian"
+                source: "assets/location.png"
+
+        SpaceWidget:
+            height: Window.height * 0.01
+
+        CustomButton:
+            size_hint_y: None
+            height: Window.height * 0.05
+            text: "Edit Profile"
+        
+        SpaceWidget:
+            height: Window.height * 0.01
+        LineWidget:
+
+        HeaderLabel:
+            text: "Resume"
+            height: Window.height * 0.05
+            font_size: sp(16)
+        
+        ResumeWidget:
+			id: custom_radio
+			text: "No file selected"
+			source: "assets/upload_pdf.png"
+			clickable: True
+        
+        SpaceWidget:
+            height: Window.height * 0.01
+        LineWidget:
+        SpaceWidget:
+            height: Window.height * 0.01
+        
+        HeaderLabel:
+            height: Window.height * 0.05
+            font_size: sp(18)
+            text: "ABOUT ME"
+
+        ScrollView:
+            size_hint_y: None
+            height: Window.height * 0.25
+            Label:
+                size_hint_y: None
+                height: self.texture_size[1]
+                text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'top'
+                font_size: sp(14)
+                color: 0.2, 0.2, 0.2, 1
+            
+        SpaceWidget:
+            height: Window.height * 0.01
+        
+        CustomButton:
+            size_hint_y: None
+            height: Window.height * 0.05
+            text: "CLOSE"
+            on_release: root.manager.go_to_menu()
+        
+        SpaceWidget:
+            height: Window.height * 0.05

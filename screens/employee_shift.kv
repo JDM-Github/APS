@@ -1,0 +1,128 @@
+<HeaderTableLabel@Label>:
+    size_hint_y: None
+    height: dp(30)
+    font_size: sp(12)
+    bold: True
+    canvas.before:
+        Color:
+            rgba: 120/255,	200/255, 210/255, 1	
+        Rectangle:
+            size: self.size
+            pos: self.pos
+        
+        Color:
+            rgba: 0.3, 0.3, 0.3, 1
+        Line:
+            rectangle: self.x, self.y, self.width, self.height
+
+<EvenLabel@Label>:
+    size_hint_y: None
+    height: dp(30)
+    font_size: sp(12)
+    color: 0.3, 0.3, 0.3, 1
+    canvas.before:
+        Color:
+            rgba: 0.95, 0.95, 0.95, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+        
+        Color:
+            rgba: 0.3, 0.3, 0.3, 1
+        Line:
+            rectangle: self.x, self.y, self.width, self.height
+
+<OddLabel@Label>:
+    size_hint_y: None
+    height: dp(30)
+    font_size: sp(12)
+    color: 0.3, 0.3, 0.3, 1
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+        
+        Color:
+            rgba: 0.3, 0.3, 0.3, 1
+        Line:
+            rectangle: self.x, self.y, self.width, self.height
+
+
+<TableView@ScrollView>:
+    do_scroll_x: False
+    do_scroll_y: True
+    size_hint_y: None
+    height: Window.height * 0.7
+
+    canvas.before:
+        Color:
+            rgba: 0.9, 0.9, 0.9, 1
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [dp(10), dp(10), dp(10), dp(10)]
+        Color:
+            rgba: 0.3, 0.3, 0.3, 1
+        Line:
+            rounded_rectangle: self.x, self.y, self.width, self.height, dp(10), dp(10), dp(10), dp(10) 
+
+    GridLayout:
+        cols: 3
+        size_hint_y: None
+        height: self.minimum_height
+        row_default_height: dp(30)
+        row_force_default: True
+        padding: [dp(10), dp(10)]
+        spacing: dp(1)
+
+        HeaderTableLabel:
+            text: "Time"
+        HeaderTableLabel:
+            text: "Date"
+        HeaderTableLabel:
+            text: "Event"
+
+        EvenLabel:
+            text: "8:00AM"
+        EvenLabel:
+            text: "03/10/2024"
+        EvenLabel:
+            text: "Company Meeting"
+
+        OddLabel:
+            text: "9:00AM"
+        OddLabel:
+            text: "03/10/2024"
+        OddLabel:
+            text: "Client Call"
+
+
+<EmployeeSchedule>:
+    name: 'employee-schedule'
+    canvas.before:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+			size: Window.size
+        
+        Color:
+			rgba: 150/255,	220/255, 230/255, 1
+		Rectangle:
+			size: Window.width, Window.height * 0.20
+            pos: 0, Window.height * 0.80
+
+
+	TopDesignEmployee:
+        menu_click: root.manager.go_to_employee_dash
+
+        SpaceWidget:
+            height: Window.height * 0.01
+        HeaderLabel:
+            text: "Schedule"
+            height: Window.height * 0.03
+            font_size: sp(16)
+            halign: 'center'
+
+        TableView:

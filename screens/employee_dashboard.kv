@@ -1,0 +1,123 @@
+<TopDashboardEmployee@BoxLayout>:
+    menu_click: lambda: None
+    orientation: "horizontal"
+    size_hint_y: None
+    height: Window.height * 0.05
+	spacing: Window.width * 0.05
+
+	ClickableImage:
+		size_hint_x: 0.2
+		source: "assets/logo.png"
+        on_release: root.manager.go_to_login()
+        fit_mode: "fill"
+	Widget:
+		size_hint_x: 0.4
+	
+	CustomButton:
+		size_hint_x: 0.3
+		text: "Sign out"
+        default_color: 0.8, 0.2, 0.3, 1
+        pressed_color: 0.6, 0.1, 0.2, 1
+		on_release: root.manager.go_to_login()
+
+	ClickableImage:
+		size_hint_x: 0.1
+		color: 0.3, 0.3, 0.3, 1
+		source: "assets/menu.png"
+		on_release: root.menu_click()
+
+<TopDesignEmployee@MainStackLayout>:
+    menu_click: lambda: None
+    TopDashboardEmployee:
+        menu_click: root.menu_click
+
+    BoxLayout:
+        orientation: "horizontal"
+        size_hint_y: None
+        height: Window.height * 0.1
+        padding: [dp(10), dp(10)]
+        spacing: dp(10)
+        canvas.before:
+            Color:
+                rgba: 0.9, 0.9, 0.9, 1
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+                radius: [dp(10), dp(10), dp(10), dp(10)]
+            Color:
+                rgba: 0.3, 0.3, 0.3, 1
+            Line:
+                rounded_rectangle: self.x, self.y, self.width, self.height, dp(10), dp(10), dp(10), dp(10) 
+        Widget:
+            size_hint_x: None
+            height: dp(50)
+            width: dp(50)
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    source: "assets/JDMBG.png"
+                    pos: self.pos
+                    size: self.size
+        
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_x: 0.7
+            HeaderLabel:
+                text: "ID: 923452346"
+                size_hint_y: 0.3
+                font_size: sp(16)
+                bold: False
+            
+            HeaderLabel:
+                text: "PEGA"
+                size_hint_y: 0.3
+                font_size: sp(16)
+                bold: False
+            
+            HeaderLabel:
+                text: "JOHN DAVE"
+                size_hint_y: 0.3
+                font_size: sp(16)
+                bold: False
+
+
+    
+<EmployeeDashboard>:
+    name: 'employee-dashboard'
+    canvas.before:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+			size: Window.size
+        
+        Color:
+			rgba: 150/255,	220/255, 230/255, 1
+		Rectangle:
+			size: Window.width, Window.height * 0.20
+            pos: 0, Window.height * 0.80
+
+
+	TopDesignEmployee:
+            
+        LabelButtonLeft:
+            text: "Dashboard"
+            # release: root.manager.go_to_employee_dashboard
+        
+        LabelButtonLeft:
+            text: "Attendance"
+            # release: root.manager.go_to_employee_attendance
+
+        LabelButtonLeft:
+            text: "Schedule"
+            release: root.manager.go_to_employee_schedule
+        
+        LabelButtonLeft:
+            text: "Project"
+            # release: root.manager.go_to_employee_project
+        
+        LabelButtonLeft:
+            text: "Company"
+            # release: root.manager.go_to_employee_company
+
+

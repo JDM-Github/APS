@@ -1,0 +1,81 @@
+#:import Window	kivy.core.window.Window
+
+<Register>
+	name: 'register'
+	canvas.before:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+			source:	'assets/register-bg.png'
+			size: Window.size
+
+	BoxLayout:
+		orientation: 'vertical'
+		size_hint: (0.9, None)
+		height:	self.minimum_height
+
+		spacing: dp(10)
+		padding: [dp(20), dp(20)]
+		pos_hint: {'center_x': 0.5,	'center_y':	0.5}
+
+		Widget:
+			size_hint_y: None
+			height:	dp(50)
+
+		Widget:
+			size_hint_y: None
+			height:	dp(10)
+
+		BoxLayout:
+			orientation: 'horizontal'
+			spacing: dp(5)
+			size_hint_y: None
+			height:	dp(40)
+
+			TextInputImage:
+				size_hint_x: 0.4
+				hint_text: 'Last Name'
+
+			TextInputImage:
+				size_hint_x: 0.4
+				hint_text: 'First Name'
+
+			TextInputImage:
+				size_hint_x: 0.2
+				hint_text: 'MI'
+
+
+		TextInputImage:
+			hint_text: 'Email /	Username'
+
+		TextInputImage:
+			hint_text: 'Mobile No.'
+
+		TextInputImage:
+			hint_text: 'Address'
+
+		TextInputImage:
+			hint_text: 'Gender'
+
+		TextInputImage:
+			hint_text: 'Date of Birth'
+
+		TextInputImage:
+			hint_text: 'Password'
+
+		TextInputImage:
+			hint_text: 'Confirm	Password'
+
+		CustomButton:
+			text: 'Register'
+			size_hint_y: None
+			height:	dp(40)
+			on_release:	self.register()
+
+		Label:
+			text: "Already have an account? [color=#29AFC3][ref=signup]Sign in[/ref][/color]"
+			markup:	True
+			size_hint_y: None
+			height:	dp(30)
+			color: 0.3,	0.3, 0.3, 1
+			on_ref_press: root.manager.go_to_login()

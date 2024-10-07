@@ -1,0 +1,114 @@
+
+
+<DashboardScreen>:
+	name: 'dashboard'
+	canvas.before:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+            source:	'assets/normal-bg.png'
+			size: Window.size
+	
+	StackLayout:
+        orientation: 'lr-tb'
+		size_hint: (0.98, None)
+		height:	Window.height
+
+		spacing: dp(10)
+		padding: [dp(20), dp(20)]
+		pos_hint: {'center_x': 0.5,	'center_y':	0.5}
+
+		BoxLayout:
+			spacing: Window.width * 0.05
+			orientation: "horizontal"
+			size_hint_y: None
+			height: Window.height * 0.05
+
+			ClickableImage:
+				size_hint_x: 0.2
+				source: "assets/logo.png"
+                on_release: root.manager.go_to_login()
+                fit_mode: "fill"
+
+			Widget:
+				size_hint_x: 0.4
+			
+			CustomButton:
+				size_hint_x: 0.3
+				text: "Sign in"
+				on_release: root.manager.go_to_login()
+
+			ClickableImage:
+				size_hint_x: 0.1
+				color: 0.3, 0.3, 0.3, 1
+				source: "assets/menu.png"
+				on_release: root.manager.go_to_menu()
+
+		BoxLayout:
+			orientation: "vertical"
+			size_hint_y: None
+			height: Window.height * 0.1
+
+			TextInputImage:
+				hint_text: "Search..."
+			CustomButton:
+				text: "LOCATION"
+
+		ScrollView:
+			do_scroll_x: True
+			do_scroll_y: False
+			size_hint_y: None
+			height: Window.height * 0.04
+			effect_cls: ScrollEffect
+
+			BoxLayout:
+				orientation: "horizontal"
+				size_hint_x: None
+				width: self.minimum_width
+				spacing: dp(10)
+
+				Image:
+					size_hint: (None, 1)
+					width: dp(50)
+					color: 0.3, 0.3, 0.3, 1
+					source: "assets/preference.png"
+				
+				CustomButton:
+					size_hint_x: 0.3
+					text: "Sign in"
+					on_release: root.manager.go_to_login()
+		
+
+		ScrollView:
+			canvas.before:
+				Color:
+					rgba: 0.8, 0.8, 0.8, 1
+				Rectangle:
+					size: self.size
+					pos: self.pos
+                Color:
+                    rgba: 0.5, 0.5, 0.5, 1
+                Line:
+                    rectangle: self.x, self.y, self.width, self.height
+
+			size_hint_y: None
+			height: Window.height * 0.7
+            effect_cls: ScrollEffect
+
+            BoxLayout:
+                orientation: "vertical"
+				size_hint_y: None
+				height: self.minimum_height
+				spacing: dp(10)
+                padding: dp(10)
+
+                OfferWidget:
+                OfferWidget:
+                OfferWidget:
+                OfferWidget:
+                OfferWidget:
+
+
+		Widget:
+			size_hint_y: None
+			height: Window.height * 0.02

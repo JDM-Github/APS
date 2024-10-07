@@ -1,0 +1,91 @@
+
+<ScheduleWidget@BoxLayout>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: Window.height * 0.08
+    text: ""
+    text2: ""
+    padding: dp(5), dp(0)
+
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+        
+        Color:
+            rgba: 0.6, 0.6, 0.6, 1
+        Line:
+            rectangle: self.x, self.y, self.width, self.height
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint_x: 0.8 
+        padding: dp(5), dp(5)
+
+        Label:
+            text: root.text
+            text_size: self.width, None
+            halign: 'left'
+            valign: 'center'
+            color: 0.3, 0.3, 0.3, 1
+            font_size: sp(16) 
+
+        Label:
+            text: root.text2
+            text_size: self.width, None
+            halign: 'left'
+            valign: 'center'
+            color: 0.3, 0.3, 0.3, 1
+            font_size: sp(14) 
+
+    CustomButton:
+        text: "VIEW"
+        size_hint_x: 0.2
+        size_hint_y: None
+        height: root.height * 0.5
+        font_size: sp(16)
+        pos_hint: {'center_y' : 0.5}
+
+<JobInterview>:
+    name: 'job-interview'
+
+    canvas.before:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+            source:	'assets/normal-bg.png'
+			size: Window.size
+
+	BoxLayout:
+		orientation: 'vertical'
+		size_hint: (0.98, None)
+		height:	self.minimum_height
+
+		spacing: dp(2)
+		padding: [dp(20), dp(20)]
+		pos_hint: {'center_x': 0.5,	'center_y':	0.5}
+
+        BackWidget:
+            release: root.manager.go_to_menu
+        SpaceWidget:
+
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            size_hint_y: None
+            height: Window.height * 0.9
+
+            StackLayout:
+                orientation: 'lr-tb'
+                pos_hint: {'top': 1}
+                size_hint_y: None
+                height: self.minimum_height
+                effect_cls: ScrollEffect
+
+                ScheduleWidget:
+                    text: "Washing Machine Job"
+                    text2: "6:00PM - 8:00PM"
+                    pos_hint: {'top': 1}
+                    spacing: dp(10)

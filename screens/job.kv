@@ -1,0 +1,122 @@
+
+<Job>:
+    name: 'job'
+	canvas.before:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+			size: Window.size
+        
+        Color:
+			rgba: 150/255,	220/255, 230/255, 1
+		Rectangle:
+			size: Window.width, Window.height * 0.17
+            pos: 0, Window.height * 0.83
+
+	BoxLayout:
+		orientation: 'vertical'
+		size_hint: (0.96, None)
+		height:	self.minimum_height
+
+		spacing: dp(2)
+		padding: [dp(20), dp(20)]
+		pos_hint: {'center_x': 0.5,	'center_y':	0.5}
+
+        BackWidget:
+            release: root.manager.go_to_dashboard
+
+        HeaderLabel:
+            text: "Washing Machine Job AHAHAHHAHAHAHAHHAHAH"
+        
+        HeaderLabel:
+            height: Window.height * 0.03
+            font_size: sp(12)
+            bold: False
+            text: "Washing Machine Job AHAHAHHAHAHAHAHHAHAH"
+        
+        
+        LineWidget:
+        
+        Widget:
+            size_hint_y: None
+            height: Window.height * 0.025
+        
+
+        HeaderLabel:
+            height: Window.height * 0.05
+            font_size: sp(18)
+            text: "Job details"
+
+        LabelLabel:
+            text: "Pay"
+            text2: "P12000"
+        LabelLabel:
+            text: "Job Type"
+            text2: "Full Time"
+        LabelLabel:
+            text: "Shift and schedule"
+            text2: "8 hour shift"
+        
+        Widget:
+            size_hint_y: None
+            height: Window.height * 0.025
+        
+        LineWidget:
+
+        Widget:
+            size_hint_y: None
+            height: Window.height * 0.025
+
+        HeaderLabel:
+            height: Window.height * 0.05
+            font_size: sp(18)
+            text: "Location"
+            
+        
+        LabelLabel:
+            text: "Location"
+            text2: "Taguig"
+        
+        Widget:
+            size_hint_y: None
+            height: Window.height * 0.025
+
+        LineWidget:
+
+        Widget:
+            size_hint_y: None
+            height: Window.height * 0.025
+
+        HeaderLabel:
+            height: Window.height * 0.05
+            font_size: sp(18)
+            text: "Full job description"
+
+        ScrollView:
+            size_hint_y: None
+            height: Window.height * 0.175
+            Label:
+                size_hint_y: None
+                height: self.texture_size[1]
+                text: "This is a long job description that gives details about the position, requirements, and responsibilities. It explains what the job entails, including tasks, expectations, qualifications needed, and any other necessary information."
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'top'
+                font_size: sp(14)
+                color: 0.2, 0.2, 0.2, 1
+        
+        CustomButton:
+            size_hint_y: None
+            height: Window.height * 0.05
+            text: "Apply now"
+            on_release: root.manager.go_to_applynow()
+        
+        CustomButton:
+            size_hint_y: None
+            height: Window.height * 0.05
+            text: "Close"
+            on_release: root.manager.go_to_dashboard()
+
+        Widget:
+            size_hint_y: None
+            height: Window.height * 0.02
