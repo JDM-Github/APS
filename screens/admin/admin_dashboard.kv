@@ -1,0 +1,205 @@
+<TopDashboardAdmin@BoxLayout>:
+    menu_click: lambda: None
+    signout_click: lambda: None
+    orientation: "horizontal"
+    size_hint_y: None
+    height: Window.height * 0.05
+	spacing: Window.width * 0.05
+
+	ClickableImage:
+		size_hint_x: 0.2
+		source: "assets/logo.png"
+        on_release: root.manager.go_to_login()
+        fit_mode: "fill"
+	Widget:
+		size_hint_x: 0.4
+	
+	CustomButton:
+		size_hint_x: 0.3
+		text: "Sign out"
+        default_color: 0.8, 0.2, 0.3, 1
+        pressed_color: 0.6, 0.1, 0.2, 1
+		on_release: root.signout_click()
+
+<TopDesignAdmin@MainStackLayout>:
+    menu_click: lambda: None
+    signout_click: lambda: None
+    TopDashboardAdmin:
+        menu_click: root.menu_click
+        signout_click: root.signout_click
+
+    BoxLayout:
+        orientation: "horizontal"
+        size_hint_y: None
+        height: Window.height * 0.1
+        padding: [dp(10), dp(10)]
+        spacing: dp(10)
+        canvas.before:
+            Color:
+                rgba: 0.9, 0.9, 0.9, 1
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+                radius: [dp(10), dp(10), dp(10), dp(10)]
+            Color:
+                rgba: 0.3, 0.3, 0.3, 1
+            Line:
+                rounded_rectangle: self.x, self.y, self.width, self.height, dp(10), dp(10), dp(10), dp(10) 
+        Widget:
+            size_hint_x: None
+            height: dp(50)
+            width: dp(50)
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    source: "assets/JDMBG.png"
+                    pos: self.pos
+                    size: self.size
+        
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_x: 0.7
+            HeaderLabel:
+                text: "ID: 923452346"
+                size_hint_y: 0.3
+                font_size: sp(16)
+                bold: False
+            
+            HeaderLabel:
+                text: "NONE"
+                size_hint_y: 0.3
+                font_size: sp(16)
+                bold: False
+
+            HeaderLabel:
+                text: "POSITION: ADMIN"
+                size_hint_y: 0.3
+                font_size: sp(16)
+                bold: False
+
+
+
+
+<AdminDashboard>:
+    name: 'admin-dashboard'
+    canvas.before:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+			size: Window.size
+
+        Color:
+			rgba: 150/255,	220/255, 230/255, 1
+		Rectangle:
+			size: Window.width, Window.height * 0.20
+            pos: 0, Window.height * 0.80
+
+	TopDesignAdmin:
+        signout_click: root.manager.go_to_login
+        menu_click: root.manager.go_to_employee_menu
+
+        SpaceWidget:
+
+        GridLayout:
+            cols: 2
+            size_hint_y: None
+            height: Window.height * 0.08
+            spacing: dp(5)
+
+            CustomButton:
+                text: "Attendance"
+                on_release: root.manager.go_to_admin_attendance()
+
+            CustomButton:
+                text: "Schedule"
+                on_release: root.manager.go_to_admin_schedule()
+
+            CustomButton:
+                text: "Project"
+                on_release: root.manager.go_to_admin_project()
+
+            CustomButton:
+                text: "Company"
+
+        AdminTable:
+            # TextInput:
+            #     size_hint_y: None
+            #     height: Window.height * 0.05
+
+            #     multiline: False
+            #     halign: 'left'
+            #     valign: 'center'
+            #     background_color: 0, 0, 0, 0 
+            #     foreground_color: 0.3, 0.3, 0.3, 1
+            #     cursor_color: 1, 0, 0, 1
+            #     hint_text: "Search..."
+
+            #     canvas.before:
+            #         Color:
+            #             rgba: 0.5, 0.5, 0.5, 1
+            #         Line:
+            #             rounded_rectangle: self.x, self.y, self.width, self.height, dp(10), dp(10), dp(10), dp(10)
+
+            AdminTableHeader:
+                text: "List of Employee"
+
+            EmployeesHeaderGrid:
+                cols: 3
+                Label:
+                    text: "ACTION"
+                    color: 0.3, 0.3, 0.3, 1
+                    font_size: sp(14)
+                    bold: True
+
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                size_hint_y: None
+                height: Window.height * 0.5
+
+                canvas.before:
+                    Color:
+                        rgba: 0.9, 0.9, 0.9, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+
+                AdminTableGrid:
+                    cols: 3
+                    EvenLabel:
+                        text: "John Dave Pega"
+                        font_size: sp(12)
+                    TableButton:
+                        text: "VIEW"
+                        on_release: app.view_employee()
+                    CustomButton:
+                        default_color: 0.8, 0.2, 0.3, 1
+                        pressed_color: 0.6, 0.1, 0.2, 1
+                        text: "DEACTIVATE"
+                        on_release: root.open_yes_no("deact", "John Dave Pega")
+
+                    OddLabel:
+                        text: "John Dave Pega"
+                        font_size: sp(12)
+                    TableButton:
+                        text: "VIEW"
+                    CustomButton:
+                        default_color: 0.8, 0.2, 0.3, 1
+                        pressed_color: 0.6, 0.1, 0.2, 1
+                        text: "DEACTIVATE"
+
+                    EvenLabel:
+                        text: "John Dave Pega"
+                        font_size: sp(12)
+                    TableButton:
+                        text: "VIEW"
+                    CustomButton:
+                        default_color: 0.8, 0.2, 0.3, 1
+                        pressed_color: 0.6, 0.1, 0.2, 1
+                        text: "DEACTIVATE"
+            CustomButton:
+                text: "ADD EMPLOYEE"
+                height: Window.height * 0.05
+                size_hint_y: None
+                on_release: root.add_employee()

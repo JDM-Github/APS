@@ -2,6 +2,8 @@
 #:import ScrollEffect kivy.effects.scroll.ScrollEffect
 
 
+
+
 <CircleImage@Image>:
 <ClickableImage@ButtonBehavior+Image>
 
@@ -22,7 +24,7 @@
     size_hint_y: None
     height: Window.height * 0.1
     color: 0.3, 0.3, 0.3, 1
-    text: "Washing Machine Job AHAHAHHAHAHAHAHHAHAH"
+    text: "Washing Machine Job"
     text_size: self.width, None
     halign: 'left'
     valign: 'center'
@@ -68,47 +70,111 @@
     Widget:
         size_hint_x: 0.9
 
+# <LabelLabel@BoxLayout>:
+#     text: ""
+# 	text2: ""
+# 	label1_size_hint: (0.5, 1) 
+# 	label2_size_hint: (0.5, 1) 
+#     size_hint_y: None
+# 	height:	Window.height * 0.05
+#     padding: [dp(10), dp(10)]
+
+#     canvas.before:
+# 		Color:
+# 			rgba: 1, 1, 1, 1
+# 		Rectangle:
+# 			size: self.size
+#             pos: self.pos
+        
+#         Color:
+# 			rgba: 0.6, 0.6, 0.6, 1
+#         Line:
+#             rectangle: self.x, self.y, self.width, self.height
+
+#     Label:
+#         size_hint: root.label1_size_hint
+#         text: self.parent.text
+#         text_size: self.width, None
+#         halign: 'left'
+#         valign: 'center'
+#         color: 0.3, 0.3, 0.3, 1
+
+# 		shorten: True
+#         shorten_from: 'right'
+#         ellipsis_options: {'color': (1, 0, 0, 1)}
+
+#     Label:
+# 		size_hint: root.label2_size_hint
+# 		text: self.parent.text2
+#         size_hint_x: 0.5
+
+# 		text_size: self.width, None
+# 		halign: 'right'
+#         valign: 'center'
+#         color: 0.3, 0.3, 0.3, 1
+
+# 		shorten: True
+#         shorten_from: 'right'
+#         ellipsis_options: {'color': (1, 0, 0, 1)}
+
 <LabelLabel@BoxLayout>:
     text: ""
-	text2: ""
+    text2: ""
+    label1_size_hint: (0.5, 1)
+    label2_size_hint: (0.5, 1)
+    font_size: sp(14)
+	is_readonly: True
     size_hint_y: None
-	height:	Window.height * 0.05
+    height: Window.height * 0.05
     padding: [dp(10), dp(10)]
 
     canvas.before:
-		Color:
-			rgba: 1, 1, 1, 1
-		Rectangle:
-			size: self.size
-            pos: self.pos
-        
         Color:
-			rgba: 0.6, 0.6, 0.6, 1
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+        Color:
+            rgba: 0.6, 0.6, 0.6, 1
         Line:
             rectangle: self.x, self.y, self.width, self.height
 
     Label:
-        size_hint_x: 0.5
-        text: self.parent.text
+        size_hint: root.label1_size_hint
+        text: root.text
         text_size: self.width, None
         halign: 'left'
         valign: 'center'
         color: 0.3, 0.3, 0.3, 1
 
-    Label:
-		text: self.parent.text2
-        size_hint_x: 0.5
+        shorten: True
+        shorten_from: 'right'
+        ellipsis_options: {'color': (1, 0, 0, 1)}
+        font_size: root.font_size
 
-		text_size: self.width, None
-		halign: 'right'
+    TextInput:
+        size_hint: root.label2_size_hint
+        text: root.text2
+        multiline: False
+        halign: 'right'
         valign: 'center'
-        color: 0.3, 0.3, 0.3, 1
+        background_color: 0, 0, 0, 0 
+        foreground_color: (0.3, 0.3, 0.3, 1) if not self.readonly else (0.6, 0.6, 0.6, 1)
+
+		text_size: self.size
+        readonly: root.is_readonly
+        cursor_color: 1, 0, 0, 1
+        padding_y: [self.height / 2 - self.line_height * 0.6, 0]
+        font_size: root.font_size
+
 
 <SpaceWidget@Widget>:
     size_hint_y: None
     height: Window.height * 0.025
 
-<TextInputImage@Widget>
+<TextInputImage>
+    password: False
 	hint_text: ''
 	padding: [dp(10), dp(10)]
 
@@ -130,18 +196,22 @@
             rounded_rectangle: self.x, self.y, self.width, self.height, dp(10), dp(10), dp(10), dp(10)
 
 	TextInput:
-		hint_text: self.parent.hint_text
+        id: text_input
+        text: root.text
+        on_text: root.text = self.text
+        password: root.password
+		hint_text: root.hint_text
 		background_color: 1, 1, 1, 0
 		foreground_color: 0.3, 0.3,	0.3, 1
-		padding: self.parent.padding
+		padding: root.padding
 		font_size: sp(14)
 
-		size: self.parent.size
-		pos: self.parent.pos
+		size: root.size
+		pos: root.pos
 
 <CustomButton@Button>
-	default_color: 120/255,	200/255, 210/255, 1		
-	pressed_color: 80/255, 160/255,	170/255, 1  
+	default_color: 80/255, 160/255,	170/255, 1
+    pressed_color: 60/255, 140/255,	150/255, 1  
 
 	background_normal: ''
 	background_color: 0, 0, 0, 0
@@ -150,7 +220,14 @@
 
 	canvas.before:
 		Color:
-			rgba: self.pressed_color if self.state == 'down' else self.default_color
+			rgba: self.pressed_color if self.state == 'down' and not self.disabled else self.default_color
+		RoundedRectangle:
+			size: self.size
+			pos: self.pos
+			radius:	[dp(10)]
+        
+        Color:
+			rgba: (0, 0, 0, 0.3) if self.disabled else (0, 0, 0, 0)
 		RoundedRectangle:
 			size: self.size
 			pos: self.pos
@@ -161,6 +238,39 @@
 		Line:
 			width: 1
 			rounded_rectangle: [self.x,	self.y,	self.width,	self.height, dp(10)]	
+
+<CustomToggleButton@ToggleButton>
+	default_color: 80/255, 160/255,	170/255, 1
+    pressed_color: 40/255, 120/255,	130/255, 1  
+
+	background_normal: ''
+	background_color: 0, 0, 0, 0
+	color: 1, 1, 1, 1
+	bold: True
+
+    size_hint_x: None
+    width: self.texture_size[0] + dp(20)
+
+	canvas.before:
+		Color:
+			rgba: self.pressed_color if self.state == 'down' and not self.disabled else self.default_color
+		RoundedRectangle:
+			size: self.size
+			pos: self.pos
+			radius:	[dp(10)]
+        
+        Color:
+			rgba: (0, 0, 0, 0.3) if self.disabled else (0, 0, 0, 0)
+		RoundedRectangle:
+			size: self.size
+			pos: self.pos
+			radius:	[dp(10)]
+
+		Color:
+			rgba: 0, 0, 0, 1
+		Line:
+			width: 1
+			rounded_rectangle: [self.x,	self.y,	self.width,	self.height, dp(10)]
 
 <OfferWidget@BoxLayout>:
 	orientation: "vertical"	
@@ -263,6 +373,29 @@
             height: dp(40)
             on_release: root.dismiss()
 
+<CustomTextInput@TextInput>:
+    size_hint_y: None
+    height: dp(30)
+    font_size: sp(12)
+    color: 0.3, 0.3, 0.3, 1
+
+    background_color: 0.95, 0.95, 0.95, 1
+    background_normal: ""
+    halign: 'left'
+    valign: 'center'
+    foreground_color: 0.3, 0.3, 0.3, 1
+
+    shorten: True
+    shorten_from: 'right'
+    ellipsis_options: {'color': (1, 0, 0, 1)}
+
+    multiline: False
+    canvas.before:
+        Color:
+            rgba: 0.3, 0.3, 0.3, 1
+        Line:
+            rectangle: self.x, self.y, self.width, self.height
+
 <MainStackLayout@StackLayout>:
 	orientation: 'lr-tb'
 	size_hint: (0.98, None)
@@ -271,3 +404,229 @@
 	spacing: dp(10)
 	padding: [dp(10), dp(10)]
 	pos_hint: {'center_x': 0.5,	'center_y':	0.5}
+
+
+
+
+
+
+
+
+
+
+# -----------------------------------------------------------
+#  TABLE 
+# -----------------------------------------------------------
+
+<HeaderTableLabel@Label>:
+    size_hint_y: None
+    height: dp(30)
+    font_size: sp(12)
+    bold: True
+    shorten: True
+    shorten_from: 'right'
+    ellipsis_options: {'color': (1, 0, 0, 1)}
+    canvas.before:
+        Color:
+            rgba: 80/255, 160/255, 170/255, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+        
+        Color:
+            rgba: 0.3, 0.3, 0.3, 1
+        Line:
+            rectangle: self.x, self.y, self.width, self.height
+
+<EvenLabel>:
+    size_hint_y: None
+    height: dp(30)
+    font_size: sp(12)
+    color: 0.2, 0.2, 0.2, 1
+
+    shorten: True
+    shorten_from: 'right'
+    ellipsis_options: {'color': (1, 0, 0, 1)}
+    canvas.before:
+        Color:
+            rgba: 0.95, 0.95, 0.95, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+        
+        Color:
+            rgba: 0.2, 0.2, 0.2, 1
+        Line:
+            rectangle: self.x, self.y, self.width, self.height
+
+<OddLabel>:
+    size_hint_y: None
+    height: dp(30)
+    font_size: sp(12)
+    color: 0.2, 0.2, 0.2, 1
+    shorten: True
+    shorten_from: 'right'
+    ellipsis_options: {'color': (1, 0, 0, 1)}
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+        
+        Color:
+            rgba: 0.2, 0.2, 0.2, 1
+        Line:
+            rectangle: self.x, self.y, self.width, self.height
+
+
+<TableButton@Button>:
+    size_hint_y: None
+    height: dp(30)
+    font_size: sp(12)
+    color: 0.3, 0.3, 0.3, 1
+    shorten: True
+    shorten_from: 'right'
+    color: 1, 1, 1, 1
+    bold: True
+    ellipsis_options: {'color': (1, 0, 0, 1)}
+    background_color: 1, 1, 1, 0
+    background_normal: ""
+    canvas.before:
+        Color:
+            rgba: (0.7, 0.7, 0.7, 1) if self.state != "down" else (80/255,	160/255, 170/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [dp(10)]
+        
+        Color:
+            rgba: 0.3, 0.3, 0.3, 1
+        Line:
+            width: 1
+            rounded_rectangle: self.x, self.y, self.width, self.height, dp(10), dp(10), dp(10), dp(10)
+
+<TableView>:
+    do_scroll_x: False
+    do_scroll_y: True
+    size_hint_y: None
+    height: Window.height * 0.7
+
+    canvas.before:
+        Color:
+            rgba: 0.9, 0.9, 0.9, 1
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [dp(10), dp(10), dp(10), dp(10)]
+        Color:
+            rgba: 0.3, 0.3, 0.3, 1
+        Line:
+            rounded_rectangle: self.x, self.y, self.width, self.height, dp(10), dp(10), dp(10), dp(10) 
+
+
+
+
+
+
+
+# <AdminTable>:
+#     orientation: "lr-tb"
+#     size_hint_y: None
+#     height: Window.height * 0.6
+
+<AdminTableHeader@Label>:
+    text: ""
+    size_hint_y: None
+    height: Window.height * 0.04
+
+    canvas.before:
+        Color:
+            rgba: 100/255,	180/255, 190/255, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+        
+        Color:
+            rgba: 0.1, 0.1, 0.1, 1
+        Line:
+            rectangle: self.x, self.y, self.width, self.height
+
+<EmployeesHeaderGrid@GridLayout>:
+    size_hint_y: None
+    height: Window.height * 0.03
+    cols: 2
+    Label:
+        text: "NAME"
+        color: 0.3, 0.3, 0.3, 1
+        font_size: sp(14)
+        bold: True
+    Label:
+        text: "VIEW"
+        color: 0.3, 0.3, 0.3, 1
+        font_size: sp(14)
+        bold: True
+
+<EmployeeScheduleHeaderGrid@GridLayout>:
+    size_hint_y: None
+    height: Window.height * 0.03
+    cols: 4
+    Label:
+        text: "DATE"
+        color: 0.3, 0.3, 0.3, 1
+        font_size: sp(14)
+        bold: True
+    Label:
+        text: "FROM"
+        color: 0.3, 0.3, 0.3, 1
+        font_size: sp(14)
+        bold: True
+    Label:
+        text: "TO"
+        color: 0.3, 0.3, 0.3, 1
+        font_size: sp(14)
+        bold: True
+    Label:
+        text: "DESC"
+        color: 0.3, 0.3, 0.3, 1
+        font_size: sp(14)
+        bold: True
+
+<AttendanceHeaderGrid@GridLayout>:
+    size_hint_y: None
+    height: Window.height * 0.03
+    cols: 4
+    Label:
+        text: "NAME"
+        color: 0.3, 0.3, 0.3, 1
+        font_size: sp(12)
+        bold: True
+    Label:
+        text: "TIME IN"
+        color: 0.3, 0.3, 0.3, 1
+        font_size: sp(12)
+        bold: True
+    Label:
+        text: "TIME OUT"
+        color: 0.3, 0.3, 0.3, 1
+        font_size: sp(12)
+        bold: True
+    Label:
+        text: "DATE"
+        color: 0.3, 0.3, 0.3, 1
+        font_size: sp(12)
+        bold: True
+
+<AdminTableGrid@GridLayout>:
+    size_hint_y: None
+    height: self.minimum_height
+    row_default_height: dp(30)
+    row_force_default: True
+    spacing: dp(1)
+    cols: 2
+
+<AdminTable>:
+    orientation: "lr-tb"
+    size_hint_y: None
+    height: Window.height * 0.6
+

@@ -27,16 +27,20 @@
 
 		TextInputImage:
 			hint_text: 'Email'
+			text: root.email
+			on_text: root.email = self.text
 
 		TextInputImage:
 			hint_text: 'Password'
-
+			password: True
+			text: root.password
+			on_text: root.password = self.text
 
 		CustomButton:
 			text: 'Login'
 			size_hint_y: None
 			height:	dp(40)
-			on_release:	root.manager.go_to_employee_dash()
+			on_release:	root.login_account()
 
 		Label:
 			text: 'Forgot Password?'

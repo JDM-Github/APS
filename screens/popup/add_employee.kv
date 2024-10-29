@@ -1,0 +1,128 @@
+<AddEmployee>:
+    title: ""
+    separator_height: 0
+    size_hint: 0.8, 0.7
+    auto_dismiss: False
+
+    background_color: 1, 1, 1, 1
+    background: ""
+
+    canvas.before:
+        Color:
+            rgba: 0.9, 0.8,1, 1
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(10)
+        spacing: dp(5)
+
+        Label:
+            text: "Add Employee"
+            color: 0.3, 0.3, 0.3, 1
+            text_size: self.width, None
+            halign: 'center'
+            valign: 'center'
+            font_size: sp(16)
+            bold: True
+        SpaceWidget:
+            height: Window.height * 0.01
+
+        CustomTextInput:
+            size_hint_y: None
+            height: Window.height * 0.05
+            hint_text: "First Name"
+            multiline: False
+            text: root.first_name
+            on_text: root.first_name = self.text
+        
+        BoxLayout:
+            size_hint_y: None
+            height: Window.height * 0.05
+            orientation: "horizontal"
+
+            CustomTextInput:
+                hint_text: "Last Name"
+                multiline: False
+                size_hint_x: 0.7
+                text: root.last_name
+                on_text: root.last_name = self.text
+            
+            CustomTextInput:
+                hint_text: "MI"
+                multiline: False
+                size_hint_x: 0.3
+                text: root.middle_initial
+                on_text: root.middle_initial = self.text
+
+        CustomSpinner:
+            size_hint_y: None
+            height: Window.height * 0.04
+            id: employee_spinner
+            values: ["Male", "Female"]
+            text: root.gender_selected
+            on_text: root.gender_selected = self.text
+
+        CustomTextInput:
+            size_hint_y: None
+            height: Window.height * 0.05
+            hint_text: "Email"
+            multiline: False
+            text: root.email
+            on_text: root.email = self.text
+        
+        CustomTextInput:
+            size_hint_y: None
+            height: Window.height * 0.05
+            hint_text: "Password"
+            multiline: False
+            text: root.password
+            on_text: root.password = self.text
+        
+        CustomTextInput:
+            size_hint_y: None
+            height: Window.height * 0.05
+            hint_text: "Department"
+            multiline: False
+            text: root.department
+            on_text: root.department = self.text
+        
+        ScrollView:
+            size_hint_y: None
+            height: Window.height * 0.15
+
+            StackLayout:
+                id: all_skills  
+                orientation: 'lr-tb'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(5)
+
+        SpaceWidget:
+            height: Window.height * 0.01
+        
+        CustomToggleButton:
+            id: is_manager
+            text: "PROJECT MANAGER"
+            size_hint_y: None
+            size_hint_x: 1
+            height: Window.height * 0.04
+        
+        SpaceWidget:
+            height: Window.height * 0.01
+
+        BoxLayout:
+            size_hint_y: None
+            height: Window.height * 0.04
+            spacing: dp(5)
+            CustomButton:
+                text: "Create"
+                on_release: root.create_account()
+
+            CustomButton:
+                text: "Cancel"
+                default_color: 0.8, 0.2, 0.3, 1
+                pressed_color: 0.6, 0.1, 0.2, 1
+                on_release: root.dismiss()

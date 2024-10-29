@@ -1,0 +1,158 @@
+<ProjectPopup>:
+    title: ""
+    separator_height: 0
+    size_hint: 0.8, 0.78
+    auto_dismiss: False
+
+    background_color: 1, 1, 1, 1
+    background: ""
+
+    canvas.before:
+        Color:
+            rgba: 0.9, 0.8,1, 1
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(10)
+        spacing: dp(5)
+
+        Label:
+            text: "Create Project"
+            color: 0.3, 0.3, 0.3, 1
+            text_size: self.width, None
+            halign: 'center'
+            valign: 'center'
+            font_size: sp(16)
+            bold: True
+        SpaceWidget:
+            height: Window.height * 0.01
+        
+        CustomSpinner:
+            id: project_manager
+            size_hint_y: None
+            height: Window.height * 0.04
+            text: "Select Project Manager"
+            # values: ["John Doe", "Jane Smith", "Michael Brown"]
+            values: root.project_managers.keys()
+
+        BoxLayout:
+            size_hint_y: None
+            height: Window.height * 0.09
+            orientation: "vertical"
+            Label:
+                text: "Project Name"
+                color: 0.3, 0.3, 0.3, 1
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'center'
+
+            CustomTextInput:
+                multiline: False
+                text: root.project_name
+                on_text: root.project_name = self.text
+        
+        BoxLayout:
+            size_hint_y: None
+            height: Window.height * 0.09
+            orientation: "vertical"
+            Label:
+                text: "Project Location"
+                color: 0.3, 0.3, 0.3, 1
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'center'
+
+            CustomTextInput:
+                multiline: False
+                text: root.project_location
+                on_text: root.project_location = self.text
+        
+        CustomSpinner:
+            size_hint_y: None
+            height: Window.height * 0.04
+            id: employee_spinner
+            values: ["Emergency Repair", "Maintenance", "New Installation"]
+
+            text: root.project_type
+            on_text: root.project_type = self.text
+        
+        BoxLayout:
+            size_hint_y: None
+            height: Window.height * 0.09
+            orientation: "vertical"
+            Label:
+                text: "Start Date:"
+                color: 0.3, 0.3, 0.3, 1
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'center'
+
+            CustomTextInput:
+                id: date_input
+                hint_text: "YYYY-MM-DD"
+                multiline: False
+                readonly: True
+                on_focus: app.show_date_picker(self, self.focus, True)
+
+                text: root.start_date
+                on_text: root.start_date = self.text
+            
+        BoxLayout:
+            size_hint_y: None
+            height: Window.height * 0.09
+            orientation: "vertical"
+            Label:
+                text: "End Date:"
+                color: 0.3, 0.3, 0.3, 1
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'center'
+
+            CustomTextInput:
+                id: date_input
+                hint_text: "YYYY-MM-DD"
+                multiline: False
+                readonly: True
+                on_focus: app.show_date_picker(self, self.focus, True)
+
+                text: root.end_date
+                on_text: root.end_date = self.text
+
+        BoxLayout:
+            size_hint_y: None
+            height: self.minimum_height
+            orientation: "vertical"
+            Label:
+                size_hint_y: None
+                height: Window.height * 0.045
+                text: "Project Description"
+                color: 0.3, 0.3, 0.3, 1
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'center'
+
+            CustomTextInput:
+                size_hint_y: None
+                height: Window.height * 0.1
+                multiline: False
+                text: root.project_description
+                on_text: root.project_description = self.text
+
+        SpaceWidget:
+            height: Window.height * 0.01
+        BoxLayout:
+            size_hint_y: None
+            height: Window.height * 0.04
+            spacing: dp(5)
+            CustomButton:
+                text: "Create"
+                on_release: root.create_project()
+
+            CustomButton:
+                text: "Cancel"
+                default_color: 0.8, 0.2, 0.3, 1
+                pressed_color: 0.6, 0.1, 0.2, 1
+                on_release: root.dismiss()

@@ -1,2 +1,66 @@
 
-<Attendance>:
+<EmployeeAttendance>:
+    name: 'employee-attendance'
+    canvas.before:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+			size: Window.size
+        
+        Color:
+			rgba: 150/255,	220/255, 230/255, 1
+		Rectangle:
+			size: Window.width, Window.height * 0.20
+            pos: 0, Window.height * 0.80
+
+
+	TopDesignEmployee:
+        signout_click: root.manager.go_to_login
+        menu_click: root.manager.go_to_employee_menu
+
+        SpaceWidget:
+            height: Window.height * 0.01
+        HeaderLabel:
+            text: "Attendance"
+            height: Window.height * 0.03
+            font_size: sp(16)
+            halign: 'center'
+
+        # GridLayout:
+        #     cols: 3
+        #     size_hint_y: None
+        #     height: Window.height * 0.05
+
+        #     CustomButton:
+        #         text: "ATTEND"
+
+        TableView:
+            GridLayout:
+                cols: 3
+                size_hint_y: None
+                height: self.minimum_height
+                row_default_height: dp(30)
+                row_force_default: True
+                padding: [dp(10), dp(10)]
+                spacing: dp(1)
+
+                HeaderTableLabel:
+                    text: "Time in"
+                HeaderTableLabel:
+                    text: "Time out"
+                HeaderTableLabel:
+                    text: "Date"
+
+                EvenLabel:
+                    text: "8:00AM"
+                EvenLabel:
+                    text: "03/10/2024"
+                EvenLabel:
+                    text: "Company Meeting"
+
+                OddLabel:
+                    text: "9:00AM"
+                OddLabel:
+                    text: "03/10/2024"
+                OddLabel:
+                    text: "Client Call"

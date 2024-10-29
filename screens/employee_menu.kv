@@ -1,0 +1,47 @@
+    
+<EmployeeMenu>:
+    name: 'employee-menu'
+    canvas.before:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+			size: Window.size
+
+        Color:
+			rgba: 150/255,	220/255, 230/255, 1
+		Rectangle:
+			size: Window.width, Window.height * 0.20
+            pos: 0, Window.height * 0.80
+
+	TopDesignEmployee:
+        signout_click: root.manager.go_to_login
+
+        LabelButtonLeft:
+            text: "Dashboard"
+            release: root.manager.go_to_employee_dash
+
+        LabelButtonLeft:
+            text: "Profile"
+            release: root.manager.go_to_employee_profile
+
+        LabelButtonLeft:
+            text: "Attendance"
+            release: root.manager.go_to_employee_attendance
+        
+        LabelButtonLeft:
+            text: "Attendance Report"
+            release: root.manager.go_to_employee_report
+
+        LabelButtonLeft:
+            text: "Schedule"
+            release: root.manager.go_to_employee_schedule
+        
+        LabelButtonLeft:
+            text: "Project"
+            # release: root.manager.go_to_employee_project
+        
+        LabelButtonLeft:
+            text: "Company"
+            # release: root.manager.go_to_employee_company
+
+

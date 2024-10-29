@@ -1,0 +1,149 @@
+
+<LabelEmployeeProfile@LabelLabel>:
+    label1_size_hint: (0.3, 1)
+    label2_size_hint: (0.7, 1)
+    
+    # is_readonly: True
+
+<EmployeeProfile>:
+    name: 'employee-profile'
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            size: Window.size
+        
+        Color:
+            rgba: 150/255,  220/255, 230/255, 1
+        Rectangle:
+            size: Window.width, Window.height * 0.20
+            pos: 0, Window.height * 0.80
+
+
+    TopDesignEmployee:
+        signout_click: root.manager.go_to_login
+        menu_click: root.manager.go_to_employee_menu
+
+        Label:
+            text: "Employee Details"
+            font_size: '18sp'
+            size_hint_y: None
+            height: dp(50)
+            color: 0.3, 0.3, 0.3, 1
+
+        ScrollView:
+            size_hint: (0.98, None)
+            height: Window.height * 0.6
+            effect_cls: ScrollEffect
+
+            StackLayout:
+                orientation: 'lr-tb'
+                size_hint_y: None
+                height: self.minimum_height
+
+                LabelEmployeeProfile:
+                    text: "Profile ID"
+                    text2: app.main_state['id']
+                    is_readonly: False
+
+                SpaceWidget:
+                    height: Window.height * 0.01
+
+                LabelEmployeeProfile:
+                    text: "Profile Image"
+                    text2: app.main_state['profileImage']
+                    is_readonly: False
+                
+                SpaceWidget:
+                    height: Window.height * 0.01
+
+                LabelEmployeeProfile:
+                    text: "First Name"
+                    text2: app.main_state['firstName']
+                
+                SpaceWidget:
+                    height: Window.height * 0.01
+                
+                LabelEmployeeProfile:
+                    text: "Last Name"
+                    text2: app.main_state['lastName']
+                
+                SpaceWidget:
+                    height: Window.height * 0.01
+                
+                LabelEmployeeProfile:
+                    text: "Gender"
+                    text2: app.main_state['gender']
+                
+                SpaceWidget:
+                    height: Window.height * 0.01
+
+                LabelEmployeeProfile:
+                    text: "Email"
+                    text2: app.main_state['email']
+
+                SpaceWidget:
+                    height: Window.height * 0.01
+
+                LabelEmployeeProfile:
+                    text: "Phone"
+                    text2: app.main_state['phoneNumber']
+                    is_readonly: False
+
+                SpaceWidget:
+                    height: Window.height * 0.01
+
+                LabelEmployeeProfile:
+                    text: "Address"
+                    text2: app.main_state['location']
+                    is_readonly: False
+
+                SpaceWidget:
+                    height: Window.height * 0.01
+
+                LabelEmployeeProfile:
+                    text: "Active"
+                    text2: "Yes"
+
+                SpaceWidget:
+                    height: Window.height * 0.01
+
+                LabelEmployeeProfile:
+                    text: "Position"
+                    text2: app.main_state['position']
+
+                SpaceWidget:
+                    height: Window.height * 0.01
+
+                LabelEmployeeProfile:
+                    text: "Department"
+                    text2: app.main_state['department']
+
+                SpaceWidget:
+                    height: Window.height * 0.01
+
+                LabelEmployeeProfile:
+                    text: "Start Date"
+                    text2: app.main_state['startDate'] if app.main_state['startDate'] else "N/A"
+
+                SpaceWidget:
+                    height: Window.height * 0.01
+
+                LabelEmployeeProfile:
+                    text: "End Date"
+                    text2: app.main_state['endDate'] if app.main_state['endDate'] else "N/A"
+
+                SpaceWidget:
+                    height: Window.height * 0.01
+
+                LabelEmployeeProfile:
+                    text: "Salary"
+                    text2: app.main_state['salary']
+
+                SpaceWidget:
+                    height: Window.height * 0.01
+
+        CustomButton:
+            text: "SAVE PROFILE"
+            size_hint_y: None
+            height: Window.height * 0.05

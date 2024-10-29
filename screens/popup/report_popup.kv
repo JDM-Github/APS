@@ -1,0 +1,112 @@
+
+<ReportPopup>:
+    title: ""
+    separator_height: 0
+    size_hint: 0.8, 0.50
+    auto_dismiss: False
+
+    background_color: 1, 1, 1, 1
+    background: ""
+
+    canvas.before:
+        Color:
+            rgba: 0.9, 0.8,1, 1
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(10)
+        spacing: dp(5)
+
+
+        BoxLayout:
+            size_hint_y: None
+            height: Window.height * 0.09
+            orientation: "vertical"
+            Label:
+                text: "From:"
+                color: 0.3, 0.3, 0.3, 1
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'center'
+
+            CustomTextInput:
+                id: sign_in_time_input
+                hint_text: "FROM"
+                multiline: False
+
+
+        CustomSpinner:
+            size_hint_y: None
+            height: Window.height * 0.04
+            id: employee_spinner
+            text: "Select Employee"
+            values: ["John Doe", "Jane Smith", "Michael Brown"]  # Sample employee data
+
+
+        BoxLayout:
+            size_hint_y: None
+            height: self.minimum_height
+            orientation: "vertical"
+            Label:
+                size_hint_y: None
+                height: Window.height * 0.045
+                text: "Description:"
+                color: 0.3, 0.3, 0.3, 1
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'center'
+
+            CustomTextInput:
+                size_hint_y: None
+                height: Window.height * 0.01
+                hint_text: ""
+        
+        BoxLayout:
+            size_hint_y: None
+            height: Window.height * 0.09
+            orientation: "vertical"
+            Label:
+                text: "Sign-Out Time:"
+                color: 0.3, 0.3, 0.3, 1
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'center'
+
+            CustomTextInput:
+                id: sign_in_time_input
+                hint_text: "HH:MM"
+                multiline: False
+                readonly: True
+                on_focus: app.show_time_picker(self, self.focus)
+
+        BoxLayout:
+            size_hint_y: None
+            height: Window.height * 0.09
+            orientation: "vertical"
+            Label:
+                text: "Place:"
+                color: 0.3, 0.3, 0.3, 1
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'center'
+
+            CustomTextInput:
+                id: place_input
+                hint_text: "Enter Place"
+                multiline: False
+
+        BoxLayout:
+            size_hint_y: None
+            height: Window.height * 0.04
+            CustomButton:
+                text: "Submit"
+                on_release: root.submit_attendance()
+
+            CustomButton:
+                text: "Cancel"
+                default_color: 0.8, 0.2, 0.3, 1
+                pressed_color: 0.6, 0.1, 0.2, 1
+                on_release: root.dismiss()

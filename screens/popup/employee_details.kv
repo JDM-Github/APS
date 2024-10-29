@@ -1,0 +1,117 @@
+
+<EmployeeDetail>:
+    title: ""
+    separator_height: 0
+    size_hint: 0.8, 0.7
+    auto_dismiss: False
+
+    background_color: 1, 1, 1, 1
+    background: ""
+
+    canvas.before:
+        Color:
+            rgba: 0.9, 0.8,1, 1
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(10)
+        spacing: dp(5)
+
+        Label:
+            text: "Employee Detail"
+            color: 0.3, 0.3, 0.3, 1
+            text_size: self.width, None
+            halign: 'center'
+            valign: 'center'
+            font_size: sp(16)
+            bold: True
+        SpaceWidget:
+            height: Window.height * 0.01
+
+        LabelLabel:
+            size_hint_y: None
+            height: Window.height * 0.05
+            text: "Full Name"
+            text2: ""
+            label1_size_hint: (0.3, 1)
+            label2_size_hint: (0.7, 1)
+
+        LabelLabel:
+            size_hint_y: None
+            height: Window.height * 0.05
+            text: "Gender"
+            text2: "Male"
+            label1_size_hint: (0.3, 1)
+            label2_size_hint: (0.7, 1)
+        
+        LabelLabel:
+            size_hint_y: None
+            height: Window.height * 0.05
+            text: "Location"
+            text2: "Location por pabor"
+            label1_size_hint: (0.3, 1)
+            label2_size_hint: (0.7, 1)
+        
+        LabelLabel:
+            size_hint_y: None
+            height: Window.height * 0.05
+            text: "Email"
+            text2: "jdmaster888@gmail.com"
+            label1_size_hint: (0.3, 1)
+            label2_size_hint: (0.7, 1)
+        
+        LabelLabel:
+            size_hint_y: None
+            height: Window.height * 0.05
+            text: "Department"
+            text2: "IT"
+            label1_size_hint: (0.3, 1)
+            label2_size_hint: (0.7, 1)
+        
+        LabelLabel:
+            size_hint_y: None
+            height: Window.height * 0.05
+            text: "Position"
+            text2: "Software Engeenering"
+            label1_size_hint: (0.3, 1)
+            label2_size_hint: (0.7, 1)
+        
+        LabelLabel:
+            size_hint_y: None
+            height: Window.height * 0.05
+            text: "Start Date"
+            text2: "06/14/04"
+            label1_size_hint: (0.3, 1)
+            label2_size_hint: (0.7, 1)
+        
+        ScrollView:
+            size_hint_y: None
+            height: Window.height * 0.15
+
+            StackLayout:
+                orientation: 'lr-tb'
+                size_hint_y: None
+                height: self.minimum_height
+
+                LabelLabel:
+                    size_hint_y: None
+                    height: Window.height * 0.05
+                    text: "Programming"
+                    label1_size_hint: (1, 1)
+                
+                LabelLabel:
+                    size_hint_y: None
+                    height: Window.height * 0.05
+                    text: "Programming"
+                    label1_size_hint: (1, 1)
+
+        CustomButton:
+            text: "Close"
+            size_hint_y: None
+            height: Window.height * 0.04
+            default_color: 0.8, 0.2, 0.3, 1
+            pressed_color: 0.6, 0.1, 0.2, 1
+            on_release: root.dismiss()

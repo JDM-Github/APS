@@ -1,0 +1,66 @@
+
+<AdminProject>:
+    name: 'admin-project'
+    canvas.before:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+			size: Window.size
+
+        Color:
+			rgba: 150/255,	220/255, 230/255, 1
+		Rectangle:
+			size: Window.width, Window.height * 0.20
+            pos: 0, Window.height * 0.80
+
+	TopDesignAdmin:
+        signout_click: root.manager.go_to_login
+        menu_click: root.manager.go_to_employee_menu
+
+        SpaceWidget:
+
+        GridLayout:
+            cols: 2
+            size_hint_y: None
+            height: Window.height * 0.04
+            spacing: dp(5)
+
+            CustomButton:
+                text: "Back"
+                on_release: root.manager.go_to_admin_dashboard()
+
+            CustomButton:
+                text: "Add Project"
+                on_release: root.add_project()
+
+        AdminTable:
+            SpaceWidget:
+                height: Window.height * 0.01
+
+            AdminTableHeader:
+                text: "Project List"
+
+            EmployeesHeaderGrid:
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                size_hint_y: None
+                height: Window.height * 0.6
+
+                canvas.before:
+                    Color:
+                        rgba: 0.9, 0.9, 0.9, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+
+                AdminTableGrid:
+                    id: employee_table
+                    cols: 2
+                    # EvenLabel:
+                    #     text: "Project1"
+                    #     font_size: sp(10)
+                    # TableButton:
+                    #     text: "VIEW"
+                    #     on_release: root.manager.go_to_admin_project_view()
+

@@ -1,0 +1,77 @@
+
+<AdminProjectView>:
+    name: 'admin-project-view'
+    canvas.before:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+			size: Window.size
+
+        Color:
+			rgba: 150/255,	220/255, 230/255, 1
+		Rectangle:
+			size: Window.width, Window.height * 0.20
+            pos: 0, Window.height * 0.80
+
+	TopDesignAdmin:
+        signout_click: root.manager.go_to_login
+        menu_click: root.manager.go_to_employee_menu
+
+        SpaceWidget:
+        CustomSpinner:
+            size_hint_y: None
+            height: Window.height * 0.04
+            text: root.project['Users']['firstName'] + " " + root.project['Users']['middleName'] + " " + root.project['Users']['lastName']
+            values: []
+
+        GridLayout:
+            cols: 3
+            size_hint_y: None
+            height: Window.height * 0.04
+            spacing: dp(5)
+
+            CustomButton:
+                text: "Back"
+                on_release: root.manager.go_to_admin_project()
+
+            CustomButton:
+                text: "Add Employee"
+                on_release: root.add_project()
+            
+            CustomButton:
+                text: "Details"
+                on_release: root.project_detail()
+
+        AdminTable:
+            SpaceWidget:
+                height: Window.height * 0.01
+
+            AdminTableHeader:
+                text: "Project1 Employees List"
+
+            EmployeesHeaderGrid:
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                size_hint_y: None
+                height: Window.height * 0.5
+
+                canvas.before:
+                    Color:
+                        rgba: 0.9, 0.9, 0.9, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+
+                AdminTableGrid:
+                    cols: 3
+                    EvenLabel:
+                        text: "John Dave Pega"
+                        font_size: sp(12)
+                    TableButton:
+                        text: "VIEW"
+                        on_release: app.view_employee()
+                    CustomButton:
+                        default_color: 0.8, 0.2, 0.3, 1
+                        pressed_color: 0.6, 0.1, 0.2, 1
+                        text: "REMOVE"

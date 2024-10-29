@@ -1,0 +1,44 @@
+<AlertPopup>:
+    title: ""
+    separator_height: 0
+    size_hint: 0.8, 0.2
+    auto_dismiss: False
+
+    background_color: 1, 1, 1, 1
+    background: ""
+
+
+    canvas.before:
+        Color:
+            rgba: 0.9, 0.8,1, 1
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(10)
+        spacing: dp(5)
+
+        Label:
+            text: root.label_text
+            color: 0.3, 0.3, 0.3, 1
+            text_size: self.width, None
+            halign: 'center'
+            valign: 'center'
+            font_size: sp(16)
+            bold: True
+
+        SpaceWidget:
+            height: Window.height * 0.02
+
+        BoxLayout:
+            size_hint_y: None
+            height: Window.height * 0.04
+            spacing: dp(5)
+
+            CustomButton:
+                text: "Close"
+                default_color: 0.8, 0.2, 0.3, 1
+                pressed_color: 0.6, 0.1, 0.2, 1
+                on_release: root.dismiss()

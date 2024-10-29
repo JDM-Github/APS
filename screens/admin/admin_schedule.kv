@@ -1,0 +1,199 @@
+
+
+<AdminSchedule>:
+    name: 'admin-schedule'
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            size: Window.size
+
+        Color:
+            rgba: 150/255,  220/255, 230/255, 1
+        Rectangle:
+            size: Window.width, Window.height * 0.20
+            pos: 0, Window.height * 0.80
+
+    TopDesignAdmin:
+        signout_click: root.manager.go_to_login
+        menu_click: root.manager.go_to_employee_menu
+
+        SpaceWidget:
+            height: Window.height * 0.01
+        HeaderLabel:
+            text: "Schedule A Employee"
+            height: Window.height * 0.03
+            font_size: sp(16)
+            halign: 'center'
+
+
+        CustomSpinner:
+            size_hint_y: None
+            height: Window.height * 0.04
+            text: "Select Project"
+            values: ["Project1", "Project2", "Project3"]
+
+        CustomSpinner:
+            size_hint_y: None
+            height: Window.height * 0.04
+            text: "Select Employee"
+            values: ["John Doe", "Jane Smith", "Michael Brown"]
+
+        CustomButton:
+            size_hint_y: None
+            height: Window.height * 0.04
+            text: "View Employee Schedule"
+            # disabled: True
+            on_release: root.manager.go_to_admin_eattendance()
+        
+        CustomTextInput:
+            size_hint_y: None
+            height: Window.height * 0.04
+
+            id: date_input
+            hint_text: "YYYY-MM-DD"
+            multiline: False
+            readonly: True
+            on_focus: app.show_date_picker(self, self.focus, True)
+
+        BoxLayout:
+            size_hint_y: None
+            height: Window.height * 0.09
+            orientation: "vertical"
+
+            Label:
+                text: "FROM:"
+                color: 0.3, 0.3, 0.3, 1
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'center'
+
+            CustomTextInput:
+                size_hint_y: None
+                height: Window.height * 0.04
+
+                id: date_input
+                hint_text: "HH:MM"
+                multiline: False
+                readonly: True
+                on_focus: app.show_time_picker(self, self.focus)
+
+        BoxLayout:
+            size_hint_y: None
+            height: Window.height * 0.09
+            orientation: "vertical"
+
+            Label:
+                text: "TO:"
+                color: 0.3, 0.3, 0.3, 1
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'center'
+
+            CustomTextInput:
+                size_hint_y: None
+                height: Window.height * 0.04
+
+                id: date_input
+                hint_text: "HH:MM"
+                multiline: False
+                readonly: True
+                on_focus: app.show_time_picker(self, self.focus)
+
+        BoxLayout:
+            size_hint_y: None
+            height: self.minimum_height
+            orientation: "vertical"
+
+            Label:
+                size_hint_y: None
+                height: Window.height * 0.04
+                text: "Description:"
+                color: 0.3, 0.3, 0.3, 1
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'center'
+
+            CustomTextInput:
+                size_hint_y: None
+                height: Window.height * 0.1
+                on_focus: app.show_time_picker(self, self.focus)
+
+        CustomButton:
+            text: "SUBMIT"
+            size_hint_y: None
+            height: Window.height * 0.04
+        
+        CustomButton:
+            default_color: 0.8, 0.2, 0.3, 1
+            pressed_color: 0.6, 0.1, 0.2, 1
+            text: "CANCEL"
+            size_hint_y: None
+            height: Window.height * 0.04
+            on_release: root.manager.go_to_admin_dashboard()
+
+        # GridLayout:
+        #     cols: 3
+        #     rows: 2
+        #     size_hint_y: None
+        #     height: Window.height * 0.08
+        #     spacing: dp(5)
+
+        #     CustomButton:
+        #         text: "Back"
+        #         on_release: root.manager.go_to_admin_dashboard()
+            
+        #     CustomButton:
+        #         text: "+Attendance"
+        #         on_release: root.open_attendance()
+            
+        #     CustomButton:
+        #         text: "+Report"
+
+        #     CustomSpinner:
+        #         text: "All User"
+        #         values: ["All User", "Pega", "Pega1", "Pega2"]
+
+        #     CustomSpinner:
+        #         text: "Daily"
+        #         values: ["Daily", "Weekly", "Yearly", "All"]
+            
+        #     CustomSpinner:
+        #         text: "All Projects"
+        #         values: ["All Projects", "Project1", "Project2", "Project3"]
+
+            
+        # AdminTable:
+
+        #     AdminTableHeader:
+        #         text: "List of Attendance"
+            
+        #     AttendanceHeaderGrid:
+
+        #     ScrollView:
+        #         do_scroll_x: False
+        #         do_scroll_y: True
+        #         size_hint_y: None
+        #         height: Window.height * 0.55
+        
+        #         canvas.before:
+        #             Color:
+        #                 rgba: 0.9, 0.9, 0.9, 1
+        #             Rectangle:
+        #                 size: self.size
+        #                 pos: self.pos
+
+        #         AdminTableGrid:
+        #             cols: 4
+        #             EvenLabel:
+        #                 text: "John Dave Pega"
+        #                 font_size: sp(10)
+        #             EvenLabel:
+        #                 text: "8:00AM"
+        #                 font_size: sp(10)
+        #             EvenLabel:
+        #                 text: "8:00AM"
+        #                 font_size: sp(10)
+        #             EvenLabel:
+        #                 text: "06/16/2004"
+        #                 font_size: sp(10)

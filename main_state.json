@@ -1,0 +1,28 @@
+{
+    "id": "",
+    "profileImage": "",
+    "firstName": "John Dave",
+    "lastName": "Pega",
+    "middleName": "C",
+    "gender": "Male",
+    "email": "jdmaster888@gmail.com",
+    "is_deactivated": false,
+    "password": "$2b$10$pD1.Ped278GZqNnHrt1t8e4nNe9TGxXK/Xinrst1blChD2UsxsW6e",
+    "department": "IT",
+    "skills": [
+        "Time Management",
+        "Problem Solving",
+        "Teamwork",
+        "Leadership"
+    ],
+    "phoneNumber": "",
+    "location": "",
+    "position": "",
+    "salary": "0",
+    "status": "Active",
+    "isManager": true,
+    "startDate": "2024-10-28",
+    "endDate": null,
+    "createdAt": "2024-10-28T09:59:15.233Z",
+    "updatedAt": "2024-10-28T09:59:15.233Z"
+}

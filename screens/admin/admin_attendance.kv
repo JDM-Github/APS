@@ -1,0 +1,138 @@
+
+<SpinnerButton@SpinnerOption>:
+    default_color: 60/255, 140/255, 150/255, 1  
+    pressed_color: 40/255, 120/255, 130/255, 1  
+
+    background_normal: ''
+    background_color: 0, 0, 0, 0
+    color: 1, 1, 1, 1
+    bold: True
+    height: Window.height * 0.04
+
+    canvas.before:
+        Color:
+            rgba: self.pressed_color if self.state == 'down' else self.default_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [dp(10)]
+
+        Color:
+            rgba: 0, 0, 0, 1
+        Line:
+            width: 1
+            rounded_rectangle: [self.x, self.y, self.width, self.height, dp(10)]    
+
+<CustomSpinner@Spinner>:
+    default_color: 100/255, 180/255, 190/255, 1
+    pressed_color: 80/255, 160/255, 170/255, 1
+    
+    background_normal: ''
+    background_color: 0, 0, 0, 0
+    color: 1, 1, 1, 1
+    bold: True
+    option_cls: 'SpinnerButton'
+    text_autoupdate: True
+
+    canvas.before:
+        Color:
+            rgba: self.pressed_color if self.state == 'down' else self.default_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [dp(10)]
+
+        Color:
+            rgba: 0, 0, 0, 1
+        Line:
+            width: 1
+            rounded_rectangle: [self.x, self.y, self.width, self.height, dp(10)]
+
+<AdminAttendance>:
+    name: 'admin-attendance'
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            size: Window.size
+
+        Color:
+            rgba: 150/255,  220/255, 230/255, 1
+        Rectangle:
+            size: Window.width, Window.height * 0.20
+            pos: 0, Window.height * 0.80
+
+    TopDesignAdmin:
+        signout_click: root.manager.go_to_login
+        menu_click: root.manager.go_to_employee_menu
+
+        SpaceWidget:
+        GridLayout:
+            cols: 2
+            rows: 2
+            size_hint_y: None
+            height: Window.height * 0.08
+            spacing: dp(5)
+
+            # CustomButton:
+            #     text: "Leave Request"
+            
+            CustomButton:
+                text: "+ Attendance"
+                on_release: root.open_attendance()
+
+            # CustomButton:
+            #     text: "Holidays"
+
+            CustomSpinner:
+                text: "All User"
+                values: ["All User", "Pega", "Pega1", "Pega2"]
+
+            CustomSpinner:
+                text: "Daily"
+                values: ["Daily", "Weekly", "Yearly", "All"]
+            
+            CustomSpinner:
+                text: "All Projects"
+                values: ["All Projects", "Project1", "Project2", "Project3"]
+
+            
+        AdminTable:
+            AdminTableHeader:
+                text: "List of Attendance"
+            
+            AttendanceHeaderGrid:
+
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                size_hint_y: None
+                height: Window.height * 0.55
+        
+                canvas.before:
+                    Color:
+                        rgba: 0.9, 0.9, 0.9, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+
+                AdminTableGrid:
+                    cols: 4
+                    EvenLabel:
+                        text: "John Dave Pega"
+                        font_size: sp(10)
+                    EvenLabel:
+                        text: "8:00AM"
+                        font_size: sp(10)
+                    EvenLabel:
+                        text: "8:00AM"
+                        font_size: sp(10)
+                    EvenLabel:
+                        text: "06/16/2004"
+                        font_size: sp(10)
+
+        CustomButton:
+            text: "BACK"
+            size_hint_y: None
+            height: Window.height * 0.04
+            on_release: root.manager.go_to_admin_dashboard()

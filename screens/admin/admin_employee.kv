@@ -1,0 +1,61 @@
+
+<AdminEmployeeAttendance>:
+    name: 'admin-employee-attendance'
+    canvas.before:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+			size: Window.size
+
+        Color:
+			rgba: 150/255,	220/255, 230/255, 1
+		Rectangle:
+			size: Window.width, Window.height * 0.20
+            pos: 0, Window.height * 0.80
+
+	TopDesignAdmin:
+        signout_click: root.manager.go_to_login
+        menu_click: root.manager.go_to_employee_menu
+
+        SpaceWidget:
+        AdminTable:
+            SpaceWidget:
+                height: Window.height * 0.01
+
+            AdminTableHeader:
+                text: "John Dave Schedule"
+
+            EmployeeScheduleHeaderGrid:
+                
+
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                size_hint_y: None
+                height: Window.height * 0.5
+
+                canvas.before:
+                    Color:
+                        rgba: 0.9, 0.9, 0.9, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+
+                AdminTableGrid:
+                    cols: 4
+                    EvenLabel:
+                        text: "05-10-2004"
+                        font_size: sp(10)
+                    EvenLabel:
+                        text: "08:00:00"
+                        font_size: sp(10)
+                    EvenLabel:
+                        text: "08:00:00"
+                        font_size: sp(10)
+                    TableButton:
+                        text: "VIEW"
+        CustomButton:
+            size_hint_y: None
+            height: Window.height * 0.04
+            text: "BACK"
+            on_release: root.manager.go_to_admin_schedule()
