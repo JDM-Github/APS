@@ -12,7 +12,7 @@ class RequestHandler:
 	url_link = "https://test888.netlify.app"
 	dev_link = "http://localhost:8888"
 
-	widget = None
+	widget  = None
 	loading = None
 
 	@staticmethod
