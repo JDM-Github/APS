@@ -2,7 +2,7 @@
 <EmployeeDetail>:
     title: ""
     separator_height: 0
-    size_hint: 0.8, 0.7
+    size_hint: 0.8, 0.75
     auto_dismiss: False
 
     background_color: 1, 1, 1, 1
@@ -34,8 +34,16 @@
         LabelLabel:
             size_hint_y: None
             height: Window.height * 0.05
+            text: "Is Project Manager"
+            text2: root.is_manager
+            label1_size_hint: (0.3, 1)
+            label2_size_hint: (0.7, 1)
+
+        LabelLabel:
+            size_hint_y: None
+            height: Window.height * 0.05
             text: "Full Name"
-            text2: ""
+            text2: root.full_name
             label1_size_hint: (0.3, 1)
             label2_size_hint: (0.7, 1)
 
@@ -43,15 +51,15 @@
             size_hint_y: None
             height: Window.height * 0.05
             text: "Gender"
-            text2: "Male"
+            text2: root.gender
             label1_size_hint: (0.3, 1)
             label2_size_hint: (0.7, 1)
-        
+
         LabelLabel:
             size_hint_y: None
             height: Window.height * 0.05
             text: "Location"
-            text2: "Location por pabor"
+            text2: root.location
             label1_size_hint: (0.3, 1)
             label2_size_hint: (0.7, 1)
         
@@ -59,7 +67,7 @@
             size_hint_y: None
             height: Window.height * 0.05
             text: "Email"
-            text2: "jdmaster888@gmail.com"
+            text2: root.email
             label1_size_hint: (0.3, 1)
             label2_size_hint: (0.7, 1)
         
@@ -67,7 +75,7 @@
             size_hint_y: None
             height: Window.height * 0.05
             text: "Department"
-            text2: "IT"
+            text2: root.department
             label1_size_hint: (0.3, 1)
             label2_size_hint: (0.7, 1)
         
@@ -75,7 +83,7 @@
             size_hint_y: None
             height: Window.height * 0.05
             text: "Position"
-            text2: "Software Engeenering"
+            text2: root.position
             label1_size_hint: (0.3, 1)
             label2_size_hint: (0.7, 1)
         
@@ -83,30 +91,40 @@
             size_hint_y: None
             height: Window.height * 0.05
             text: "Start Date"
-            text2: "06/14/04"
+            text2: root.start_date
             label1_size_hint: (0.3, 1)
             label2_size_hint: (0.7, 1)
         
         ScrollView:
             size_hint_y: None
             height: Window.height * 0.15
+            effect_cls: ScrollEffect
+            canvas:
+                Color:
+                    rgba: 0.8, 0.2, 0.3, 1
+                Line:
+                    rectangle: self.x, self.y, self.width, self.height
+                    width: dp(2)
 
             StackLayout:
+                id: all_skills
                 orientation: 'lr-tb'
                 size_hint_y: None
                 height: self.minimum_height
 
-                LabelLabel:
-                    size_hint_y: None
-                    height: Window.height * 0.05
-                    text: "Programming"
-                    label1_size_hint: (1, 1)
                 
-                LabelLabel:
-                    size_hint_y: None
-                    height: Window.height * 0.05
-                    text: "Programming"
-                    label1_size_hint: (1, 1)
+
+                # LabelLabel:
+                #     size_hint_y: None
+                #     height: Window.height * 0.05
+                #     text: "Programming"
+                #     label1_size_hint: (1, 1)
+                
+                # LabelLabel:
+                #     size_hint_y: None
+                #     height: Window.height * 0.05
+                #     text: "Programming"
+                #     label1_size_hint: (1, 1)
 
         CustomButton:
             text: "Close"

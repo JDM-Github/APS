@@ -72,15 +72,23 @@ from kivymd.uix.pickers import MDTimePickerDialVertical
 from kivymd.uix.pickers import MDModalDatePicker
 from kivy.properties import StringProperty
 from kivy.properties import ObjectProperty
-from kivy.properties import DictProperty
+from kivy.properties import DictProperty, ListProperty
 
 from kivy.metrics import dp, sp
+
+class LabelLabel(BoxLayout):
+    text = StringProperty("")
+    text2 = StringProperty("")
+    label1_size_hint = ListProperty([0, 0])
 
 class TextInputImage(Widget):
     text = StringProperty("")
 class EvenLabel(Label): pass
 class OddLabel (Label): pass
 class TableButton(Button): pass
+class CustomButton(Button):
+    default_color = ListProperty([])
+    pressed_color = ListProperty([])
 
 class CustomToggleButton(ToggleButton): pass
 
@@ -159,10 +167,10 @@ class ProjectPopup     (Popup      ):
     project_description = StringProperty("")
     project_managers = DictProperty()
 
-    def __init__(self, values, **kwargs):
+    def __init__(self, values, manager, **kwargs):
         super().__init__(**kwargs)
+        self.manager = manager
         name_id_dict = {f"{person['firstName']} {person['middleName']} {person['lastName']}": person['id'] for person in values}
-        print(name_id_dict)
         self.project_managers = name_id_dict
 
         self.ids.project_manager.values = self.project_managers.keys()
@@ -181,7 +189,9 @@ class ProjectPopup     (Popup      ):
     
     def on_sucess(self, response):
         self.dismiss()
+
         popup = AlertPopup(label_text="Successfully created project account")
+        popup.bind(on_dismiss=lambda *_: self.manager.get_screen(self.manager.current).load_all_project())
         popup.open()
 
     def on_error(self, error):
@@ -260,7 +270,28 @@ class AddEmployee      (Popup      ):
         self.dismiss()
         popup = AlertPopup(label_text="Error creating employee account: " + str(error['nessage']))
         popup.open()
-class EmployeeDetail   (Popup      ): pass
+
+class EmployeeDetail   (Popup      ):
+    full_name = StringProperty()
+    gender = StringProperty()
+    location = StringProperty()
+    email = StringProperty()
+    department = StringProperty()
+    position = StringProperty()
+    start_date = StringProperty()
+    is_manager = StringProperty()
+
+    def load_all_skills(self, employee):
+        widget = self.ids.all_skills
+        widget.clear_widgets()
+
+        skills = employee['skills']
+        for skill in skills:
+            widget.add_widget(
+                LabelLabel(
+                    size_hint_y=None, height=Window.height * 0.05,
+                    text=skill, label1_size_hint=[1, 1]))
+
 class AlertPopup       (Popup      ):
     label_text = StringProperty("")
 class YesorNoPopup     (Popup      ):
@@ -285,17 +316,46 @@ class EmployeeProfile   (Screen): pass
 
 class AdminDashboard  (Screen):
 
+    def load_all_employee(self):
+        RequestHandler.request_loader(
+        lambda: RequestHandler.create_req_suc_error("post", "users/get-all-employees", {}, self.on_success, self.on_error))
+
+    def on_success(self, response):
+        widget = self.ids.employee_table
+        widget.clear_widgets()
+
+        for index, user in enumerate(response['users']):
+            if index % 2 == 0:
+                label = EvenLabel(text=f"{user['lastName']}, {user['firstName']}", font_size=sp(12))
+            else:
+                label = OddLabel(text=f"{user['lastName']}, {user['firstName']}", font_size=sp(12))
+
+            button = TableButton(text="VIEW")
+            button.bind(on_release=partial(self.manager.view_employee, user))
+
+            deact_button = CustomButton(text="DEACTIVATE" if not user['is_deactivated'] else "ACTIVATE")
+            if not user['is_deactivated']:
+                deact_button.default_color = 0.8, 0.2, 0.3, 1
+                deact_button.pressed_color = 0.6, 0.1, 0.2, 1
+
+            deact_button.bind(on_release=partial(self.deact_or_act_user, user))
+            widget.add_widget(label)
+            widget.add_widget(button)
+            widget.add_widget(deact_button)
+
+    def on_error(self, error):
+        popup = AlertPopup(label_text=error.get('message', 'Error fetching projects'))
+        popup.open()
+
     def add_employee(self):
         popup = AddEmployee()
         popup.open()
-    
-    def open_yes_no(self, function_name, *args):
+
+    def deact_or_act_user(self, user, *_):
         popup = YesorNoPopup()
 
-        if function_name == "deact":
-            popup.label_text = "Are you sure you want to deactivate this account?"
-            popup.bind(on_dismiss=lambda instance: self.deactivate_employee(instance, *args))
-
+        popup.label_text = f"Are you sure you want to {"deactivate" if not user['is_deactivated'] else "activate"} this account?"
+        popup.bind(on_dismiss=lambda instance: self.deactivate_employee(instance, f"{user['firstName']} {user['firstName']}"))
         popup.open()
 
     def deactivate_employee(self, instance, name):
@@ -320,8 +380,7 @@ class AdminProject           (Screen):
         lambda: RequestHandler.create_req_suc_error("post", "users/get-all-manager", {}, self.on_user_sucess, self.on_user_error))
 
     def on_user_sucess(self, response):
-        popup = ProjectPopup(response.get('managers', {}))
-        popup.bind(on_dismiss=lambda *_: Clock.schedule_once(lambda *_: self.load_all_project(), 1/60))
+        popup = ProjectPopup(response.get('managers', {}), self.manager)
         popup.open()
 
     def on_user_error(self, error):
@@ -416,7 +475,10 @@ class Manager(ScreenManager):
     def go_to_employee_profile   (self): self.current = "employee-profile"
     def go_to_employee_report    (self): self.current = "employee-attendance-report"
 
-    def go_to_admin_dashboard    (self): self.current = "admin-dashboard"
+    def go_to_admin_dashboard    (self):
+        self.current = "admin-dashboard"
+        self.get_screen(self.current).load_all_employee()
+
     def go_to_admin_attendance   (self): self.current = "admin-attendance"
     def go_to_admin_schedule     (self): self.current = "admin-schedule"
     def go_to_admin_eattendance  (self): self.current = "admin-employee-attendance"
@@ -427,6 +489,25 @@ class Manager(ScreenManager):
     def go_to_admin_project_view (self, data, _):
         self.current = "admin-project-view"
         self.get_screen(self.current).load_project(data)
+    
+
+
+    # FUNCTION
+    def view_employee(self, employee, *_):
+        full_name = f"{employee['firstName']} {employee['middleName']} {employee['lastName']}"
+        gender = employee['gender']
+        location = employee['location']
+        email = employee['email']
+        department = employee['department']
+        position = employee['position']
+        start_date = employee['startDate']
+        is_manager = "YES" if employee['isManager'] else "NO"
+    
+        popup = EmployeeDetail(full_name=full_name, gender=gender,
+            location=location, email=email, department=department, position=position,
+            is_manager=is_manager, start_date=start_date)
+        popup.load_all_skills(employee)
+        popup.open()
 
 
 class APSApp(MDApp):
@@ -459,10 +540,6 @@ class APSApp(MDApp):
 
     def apply_for_job(self):
         self.sm.go_to_job()
-    
-    def view_employee(self):
-        popup = EmployeeDetail()
-        popup.open()
     
     def show_date_picker(self, widget, focus, min_is_date=False):
         if not focus:

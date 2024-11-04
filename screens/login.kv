@@ -47,12 +47,15 @@
 			size_hint_y: None
 			height:	dp(30)
 			valign:	'top'
-			color: 0, 0.5, 1, 1		
+			color: 0, 0.5, 1, 1	
+		
+		SpaceWidget:
+			height: Window.height * 0.1
 
-		Label:
-			text: "Don\'t have an account? [color=#29AFC3][ref=signup]Sign up[/ref][/color]"
-			markup:	True
-			size_hint_y: None
-			height:	dp(30)
-			color: 0.3,	0.3, 0.3, 1
-			on_ref_press: root.manager.go_to_register()
+		# Label:
+		# 	text: "Don\'t have an account? [color=#29AFC3][ref=signup]Sign up[/ref][/color]"
+		# 	markup:	True
+		# 	size_hint_y: None
+		# 	height:	dp(30)
+		# 	color: 0.3,	0.3, 0.3, 1
+		# 	on_ref_press: root.manager.go_to_register()

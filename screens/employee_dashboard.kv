@@ -103,4 +103,70 @@
 	TopDesignEmployee:
         signout_click: root.manager.go_to_login
         menu_click: root.manager.go_to_employee_menu
+        SpaceWidget:
+
+        GridLayout:
+            cols: 2
+            size_hint_y: None
+            height: Window.height * 0.08
+            spacing: dp(5)
+
+            CustomButton:
+                text: "View Attendance"
+                on_release: root.manager.go_to_admin_attendance()
+
+            CustomButton:
+                text: "Handle Attendance"
+                on_release: root.manager.go_to_admin_schedule()
+                disabled: not app.main_state.get('isManager')
+
+            CustomButton:
+                text: "Assigned Project"
+                on_release: root.manager.go_to_admin_project()
+                disabled: not app.main_state.get('projectManager', False)
+
+            CustomButton:
+                text: "Request Leave"
+        
+        LabelEmployeeProfile:
+            text: "Project Manager"
+            text2: "YOURSELF" if app.main_state.get('isManager') else app.main_state.get('projectManager') if app.main_state.get('projectManager') else "Not Assigned"
+        LabelEmployeeProfile:
+            text: "Position"
+            text2: "Project Manager" if app.main_state.get('isManager') else app.main_state.get('position') if app.main_state.get('position') else "Not Assigned"
+        LabelEmployeeProfile:
+            text: "Department"
+            text2: app.main_state.get('department') if app.main_state.get('department') else 'No Department'
+    
+        TableView:
+            height: Window.height * 0.3
+            GridLayout:
+                cols: 3
+                size_hint_y: None
+                height: self.minimum_height
+                row_default_height: dp(30)
+                row_force_default: True
+                padding: [dp(10), dp(10)]
+                spacing: dp(1)
+
+                HeaderTableLabel:
+                    text: "Time"
+                HeaderTableLabel:
+                    text: "Date"
+                HeaderTableLabel:
+                    text: "Event"
+
+                EvenLabel:
+                    text: "8:00AM"
+                EvenLabel:
+                    text: "03/10/2024"
+                EvenLabel:
+                    text: "Company Meeting"
+
+                OddLabel:
+                    text: "9:00AM"
+                OddLabel:
+                    text: "03/10/2024"
+                OddLabel:
+                    text: "Client Call"
 

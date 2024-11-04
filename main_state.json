@@ -5,14 +5,15 @@
     "lastName": "Pega",
     "middleName": "C",
     "gender": "Male",
-    "email": "jdmaster888@gmail.com",
+    "email": "jdmaster@gmail.com",
     "is_deactivated": false,
-    "password": "$2b$10$pD1.Ped278GZqNnHrt1t8e4nNe9TGxXK/Xinrst1blChD2UsxsW6e",
+    "password": "$2b$10$0nNTgQP57hoUPZ90Y/9Mu.2Wa5ZkfA4VtwlVUs84BSJR0Su8oJawa",
     "department": "IT",
     "skills": [
+        "Adaptability",
         "Time Management",
-        "Problem Solving",
         "Teamwork",
+        "Communication",
         "Leadership"
     ],
     "phoneNumber": "",
@@ -20,9 +21,10 @@
     "position": "",
     "salary": "0",
     "status": "Active",
+    "projectManager": "",
     "isManager": true,
-    "startDate": "2024-10-28",
+    "startDate": "2024-11-04",
     "endDate": null,
-    "createdAt": "2024-10-28T09:59:15.233Z",
-    "updatedAt": "2024-10-28T09:59:15.233Z"
+    "createdAt": "2024-11-04T12:29:34.960Z",
+    "updatedAt": "2024-11-04T12:29:34.960Z"
 }
