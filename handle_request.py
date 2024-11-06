@@ -9,7 +9,7 @@ from widgets import LoadingPopup
 class RequestHandler:
 
 	development = True
-	url_link = "https://test888.netlify.app"
+	url_link = "https://aps-backend.netlify.app"
 	dev_link = "http://localhost:8888"
 
 	widget  = None
