@@ -427,6 +427,10 @@ class AdminProjectView       (Screen):
         'updatedAt': '',
         'Users': {'firstName': '', 'middleName': '', 'lastName': ''}})
 
+    def add_project(self):
+        popup = YesorNoPopup(label_text="Add employee test")
+        popup.open()
+
     def load_project(self, data):
         self.project = data
 

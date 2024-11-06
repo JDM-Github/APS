@@ -1,19 +1,15 @@
 {
     "id": "",
     "profileImage": "",
-    "firstName": "John Dave",
-    "lastName": "Pega",
-    "middleName": "C",
-    "gender": "Male",
-    "email": "jdmaster@gmail.com",
+    "firstName": "test",
+    "lastName": "test",
+    "middleName": "m",
+    "gender": "Female",
+    "email": "test@gmail.com",
     "is_deactivated": false,
-    "password": "$2b$10$0nNTgQP57hoUPZ90Y/9Mu.2Wa5ZkfA4VtwlVUs84BSJR0Su8oJawa",
-    "department": "IT",
+    "password": "$2b$10$NnSgyLLNR7Ie4eTMEYTPRe.ZmYN.4PgGuznO132Z3DwWutxMZ6Ere",
+    "department": "te",
     "skills": [
-        "Adaptability",
-        "Time Management",
-        "Teamwork",
-        "Communication",
         "Leadership"
     ],
     "phoneNumber": "",
@@ -22,9 +18,9 @@
     "salary": "0",
     "status": "Active",
     "projectManager": "",
-    "isManager": true,
+    "isManager": false,
     "startDate": "2024-11-04",
     "endDate": null,
-    "createdAt": "2024-11-04T12:29:34.960Z",
-    "updatedAt": "2024-11-04T12:29:34.960Z"
+    "createdAt": "2024-11-04T12:42:01.124Z",
+    "updatedAt": "2024-11-04T12:42:01.124Z"
 }
